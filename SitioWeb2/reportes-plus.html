@@ -20,6 +20,60 @@
     </header>
     <h1>REPORTES PLUS</h1>
 
+    <form action="generar_reporte.php" method="post">
+        <h2>Filtros de Reporte</h2>
+        
+        <div class="form-group">
+          <label for="tipo_reporte">Tipo de Reporte:</label>
+          <select class="form-control" id="tipo_reporte" name="tipo_reporte">
+            <option value="">Seleccione</option>
+            <!-- Opciones de tipo de reporte -->
+            <option value="1">Reporte 1</option>
+            <option value="2">Reporte 2</option>
+            <option value="3">Reporte 3</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="ubicacion">Ubicación:</label>
+          <input type="text" class="form-control" id="ubicacion" name="ubicacion">
+        </div>
+        
+        <div class="form-group">
+          <label for="estado">Estado:</label>
+          <select class="form-control" id="estado" name="estado">
+            <option value="">Seleccione</option>
+            <!-- Opciones de estado -->
+            <option value="1">Estado 1</option>
+            <option value="2">Estado 2</option>
+            <option value="3">Estado 3</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="criticidad">Criticidad:</label>
+          <select class="form-control" id="criticidad" name="criticidad">
+            <option value="">Seleccione</option>
+            <!-- Opciones de criticidad -->
+            <option value="1">Criticidad 1</option>
+            <option value="2">Criticidad 2</option>
+            <option value="3">Criticidad 3</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="fecha_reporte">Fecha de Reporte:</label>
+          <input type="date" class="form-control" id="fecha_reporte" name="fecha_reporte">
+        </div>
+        
+        <div class="form-group">
+          <label for="usuario_reporte">Usuario de Reporte:</label>
+          <input type="text" class="form-control" id="usuario_reporte" name="usuario_reporte">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Generar Reporte</button>
+      </form>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="js/navbar.js"></script>
     <script src="js/script.js"></script>
