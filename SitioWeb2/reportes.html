@@ -18,92 +18,157 @@
         <!-- Contenido insertado dinámicamente -->
     </header>
 
-    <h1>REPORTES</h1>
+    <div class="container my-4">
+      <div class="row">
+        <div class="col">
+            <form>
+              <h1>Formulario de reporte</h1>    
+              
+              <div class="row">
+                <div class="col-4">
+                  <!-- Tipo de reporte -->              
+                  <label for="region">Tipo de reporte:</label>
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>Seleccione el tipo de reporte</option>
+                    <option value="1">Abandono</option>
+                    <option value="2">Maltrato</option>
+                    <option value="3">Adopcion</option>
+                  </select>     
+                </div>
+              </div>
+            
+              <div class="row mt-3">
+                <div class="col">                          
+                  <!-- Select de regiones -->
+                  <label for="region">Región:</label>
+                  <select class="form-select" id="region" name="region">                
+                    <option selected>Seleccione una opción</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <!-- Select de ciudades -->
+                  <label for="ciudad">Ciudad:</label>
+                  <select class="form-select" id="ciudad" name="ciudad">
+                    <option selected>Seleccione una opción</option>
+                  </select></div>
+              </div>
 
-    <!-- Tipo de reporte -->
-    <select class="form-select" aria-label="Default select example">
-        <option selected>Seleccione el tipo de reporte</option>
-        <option value="1">Abandono</option>
-        <option value="2">Maltrato</option>
-        <option value="3">Adopcion</option>
-      </select>
+              <div class="row mt-3">
+                <div class="col">
+                  <!-- Select de comunas -->
+                  <label for="comuna">Comuna:</label>
+                  <select class="form-select" id="comuna" name="comuna">
+                    <option selected>Seleccione una opción</option>
+                  </select>
+                </div>
+                <div class="col">   
+                  <!-- Ingreso de correo/usuario y descripcion del reporte -->
+                  <label for="exampleFormControlInput1" class="form-label mb-0">Ingrese su correo</label>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">            
+                </div>
+              </div>
 
+              <div class="row mt-3">
+                <div class="col">
+                  <label for="exampleFormControlTextarea1" class="form-label">Describa el evento en pocas palabras</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+              </div>
 
-      <!-- Ubicacion -->
-      <meta charset="UTF-8">
-      <title>Ubicacion de la situacion</title>
-      <!-- Agrega la referencia al archivo ubicacion.js -->
-      <script src="js/ubicacion.js"></script>
-    </head>
-    <body>
-    <form enctype="multipart/form-data">
-      <h1>Formulario de Ubicación</h1>    
-      <!-- Select de regiones -->
-      <label for="region">Región:</label>
-      <select id="region" name="region"></select>
-    
-      <!-- Select de ciudades -->
-      <label for="ciudad">Ciudad:</label>
-      <select id="ciudad" name="ciudad"></select>
-    
-      <!-- Select de comunas -->
-      <label for="comuna">Comuna:</label>
-      <select id="comuna" name="comuna"></select>
-    
-      <script>
-        // Llama a la función cargarRegiones() al cargar la página
-        window.onload = function() {
-          cargarRegiones();
-        };
-      </script>
-      </div>
-        <!-- Ingreso de correo/usuario y descripcion del reporte -->
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">ingrese su correo</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="correo@correo.com">
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Describa el evento en pocas palabras</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-      <div class="mb-3">
-        <label for="imagen">Imagen:</label>
-        <input type="file" id="imagen" name="imagen">
-      </div>
+              <div class="row mt-3">
+                <div class="col">
+                  <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="inputGroupFile01">
+                  </div>
+                </div>
+              </div>
 
-      <button type="submit">Enviar</button>
-    </form>
-    <div id="map"></div>
+              <div class="row mt-3">
+                <div class="row">
+                  <h1 class="display-6">Ubicación</h1>
+                  <div class="col">
+                    <div id="map"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col">
+                  <button type="button" class="btn btn-primary" id="enviarReporte">Enviar reporte</button>
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+
+    <input type="hidden" id="latlng" name="latlng">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUnZr3w93tboPxYTba5uXfir-Z_6uV7bI&callback=initMap" async defer></script>
-<script>
-function initMap() {
-  // Crea un nuevo mapa centrado en una ubicación inicial
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: -33.4372, lng: -70.6506 },
-    zoom: 12
-  });
-  
-  // Agrega un marcador en la ubicación seleccionada por el usuario
-  map.addListener('click', function(event) {
-placeMarker(event.latLng);
-document.getElementById('latlng').value = event.latLng.toString();
-});
+    <script src="js/navbar.js"></script>
+    <script src="js/script.js"></script>    
+    <!-- Agrega la referencia al archivo ubicacion.js -->
+    <script src="js/ubicacion.js"></script>
+    <script>      
+      // Llama a la función cargarRegiones() al cargar la página
+      window.onload = function() {
+        cargarRegiones();
+      };
 
-  
-  
-  function placeMarker(location) {
-    var marker = new google.maps.Marker({
-      position: location,
-      map: map
-    });
-  }
-}
-</script>
-<input type="hidden" id="latlng" name="latlng">
+      function initMap() {
+        // Crea un nuevo mapa centrado en una ubicación inicial
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: { lat: -33.4372, lng: -70.6506 },
+          zoom: 12
+        });
+        
+        // Agrega un marcador en la ubicación seleccionada por el usuario
+        map.addListener('click', function(event) {
+          placeMarker(event.latLng);
+          document.getElementById('latlng').value = event.latLng.toString();
+        });    
+                
+        function placeMarker(location) {
+          var marker = new google.maps.Marker({
+            position: location,
+            map: map
+          });
+        }
+      }
 
-
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-      <script src="js/navbar.js"></script>
-      <script src="js/script.js"></script>
+      // ENVIO DE FORMULARIO
+      const botonEnviar = document.getElementById('enviarReporte');
+      botonEnviar.addEventListener("click", (event) => {        
+        let timerInterval
+          Swal.fire({
+            title: 'Cargando ...',
+            html: 'Espere unos momentos por favor',
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+              }, 100)
+            },
+            didClose: () => {
+              Swal.fire({
+                title: 'Reporte enviado correctamente',
+                icon: 'success',
+                confirmButtonText:'Aceptar',
+              })
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('I was closed by the timer')
+            }
+          })
+      });
+    </script>
 </body>
 </html>

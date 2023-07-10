@@ -3,7 +3,7 @@ const navbar =
 `<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container container-navbar">
         <!-- Logo -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="index.html">
             <img src="./images/logo.png" class="img-fluid" alt="FurryCom">
         </a>
         <!-- Boton menu response -->
