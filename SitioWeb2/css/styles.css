@@ -27,3 +27,9 @@
   max-height: 100%;
   width: 100%;
 }
+
+/*clase para aplicar ajuste de tamaño de imagen a la pantalla */
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
