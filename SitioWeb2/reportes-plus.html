@@ -19,7 +19,7 @@
         <!-- Contenido insertado dinámicamente -->
     </header>
 
-<div class="container my-4">
+  <div class="container my-4">
     <h1>REPORTES PLUS</h1>
 <!-- Contenedor de formulario -->
 
@@ -27,7 +27,7 @@
         <h2>Filtros de Reporte</h2>
 
         <div class="row">
-          <div class="col-3">
+          <div class="col-4">
             <!-- Tipo de reporte -->              
             <label for="region">Tipo de reporte:</label>
             <select class="form-select" aria-label="Default select example">
@@ -38,16 +38,16 @@
             </select>     
           </div>
         </div>
-
+      
         <div class="row mt-3">
-          <div class="col-3">                          
+          <div class="col">                          
             <!-- Select de regiones -->
             <label for="region">Región:</label>
             <select class="form-select" id="region" name="region">                
               <option selected>Seleccione una opción</option>
             </select>
           </div>
-          <div class="col-3">
+          <div class="col">
             <!-- Select de ciudades -->
             <label for="ciudad">Ciudad:</label>
             <select class="form-select" id="ciudad" name="ciudad">
@@ -56,16 +56,22 @@
         </div>
 
         <div class="row mt-3">
-          <div class="col-3">
+          <div class="col">
             <!-- Select de comunas -->
             <label for="comuna">Comuna:</label>
             <select class="form-select" id="comuna" name="comuna">
               <option selected>Seleccione una opción</option>
-            </select></div>
+            </select>
           </div>
-          
-          <div class="row mt-3">
-            <div class="col-3">
+          <div class="col">   
+            <!-- Ingreso de correo/usuario y descripcion del reporte -->
+            <label for="exampleFormControlInput1" class="form-label mb-0">Ingrese su correo</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">            
+          </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
 
           <label for="region">Tipo de estado:</label>
           <select class="form-select" aria-label="Default select example">
@@ -75,41 +81,112 @@
             <option value="3">Finalizado</option>
             <option value="4">Cancelado</option>
           </select> </div>    
-        </div>
-      </div>
-        
- 
+                    
       <div class="row mt-3">
-        <div class="col-3">   
+        <div class="col">   
         
         <div class="form-group">
           <label for="criticidad">Criticidad:</label>
           <select class="form-control" id="criticidad" name="criticidad">
             <option value="">Seleccione</option>
             <!-- Opciones de criticidad -->
-            <option value="1">Criticidad 1</option>
-            <option value="2">Criticidad 2</option>
-            <option value="3">Criticidad 3</option>
+            <option value="1">Bajo</option>
+            <option value="2">Medio</option>
+            <option value="3">Alto</option>
           </select></div>
         </div>
       </div>
         
+      <div class="row mt-3">
+        <div class="col"> 
+    
         <div class="form-group">
           <label for="fecha_reporte">Fecha de Reporte:</label>
           <input type="date" class="form-control" id="fecha_reporte" name="fecha_reporte">
         </div>
+        <div class="row mt-3">
+          <div class="col"> 
         
         <div class="form-group">
           <label for="usuario_reporte">Usuario de Reporte:</label>
           <input type="text" class="form-control" id="usuario_reporte" name="usuario_reporte">
         </div>
+      </div>
         
-        <button type="submit" class="btn btn-primary">Generar Reporte</button>
+        <button type="button" class="btn btn-primary"id="generarReporte">Generar Reporte</button>
       </form>
 
+
+    </div>
+
+    <input type="hidden" id="latlng" name="latlng">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUnZr3w93tboPxYTba5uXfir-Z_6uV7bI&callback=initMap" async defer></script>
     <script src="js/navbar.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/script.js"></script>    
+    <!-- Agrega la referencia al archivo ubicacion.js -->
+    <script src="js/ubicacion.js"></script>
+    <script>      
+      // Llama a la función cargarRegiones() al cargar la página
+      window.onload = function() {
+        cargarRegiones();
+      };
+
+      function initMap() {
+        // Crea un nuevo mapa centrado en una ubicación inicial
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: { lat: -33.4372, lng: -70.6506 },
+          zoom: 12
+        });
+        
+        // Agrega un marcador en la ubicación seleccionada por el usuario
+        map.addListener('click', function(event) {
+          placeMarker(event.latLng);
+          document.getElementById('latlng').value = event.latLng.toString();
+        });    
+                
+        function placeMarker(location) {
+          var marker = new google.maps.Marker({
+            position: location,
+            map: map
+          });
+        }
+      }
+
+      // ENVIO DE FORMULARIO
+      const botonEnviar = document.getElementById('generarReporte');
+      botonEnviar.addEventListener("click", (event) => {        
+        let timerInterval
+          Swal.fire({
+            title: 'Cargando ...',
+            html: 'Espere unos momentos por favor',
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+              }, 100)
+            },
+            didClose: () => {
+              Swal.fire({
+                title: 'El reporte sera cargado en unos momentos',
+                icon: 'success',
+                confirmButtonText:'Aceptar',
+              })
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log('I was closed by the timer')
+            }
+          })
+      });
+    </script>
   </div>
 </body>
 </html>
