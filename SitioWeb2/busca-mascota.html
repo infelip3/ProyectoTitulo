@@ -19,104 +19,107 @@
         <!-- Contenido insertado dinámicamente -->
     </header>
   
-    <form id="search-form">
-      <div class="mb-3">
-        <label class="form-label">Donde vivirá?</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="vivienda" id="casaPatioRadio" value="casa-patio" onchange="showNextQuestion('vivienda')">
-          <label class="form-check-label" for="casaPatioRadio">Casa con patio</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="vivienda" id="dptoMedianoRadio" value="dpto-mediano">
-          <label class="form-check-label" for="dptoMedianoRadio">Dpto Chico o Mediano</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="vivienda" id="dptoGrandeRadio" value="dpto-grande">
-          <label class="form-check-label" for="dptoGrandeRadio">Dpto Grande</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="vivienda" id="parcelaRadio" value="parcela">
-          <label class="form-check-label" for="parcelaRadio">Parcela</label>
-        </div>
-        <!-- Agregar otras opciones -->
-      </div>
-    
-      <div class="mb-3" id="question-convivencia" style="display: none;">
-        <label class="form-label">¿Vives con más animales y/o niños?</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="convivencia" id="soloNinosRadio" value="solo-ninos" onchange="showNextQuestion('convivencia')">
-          <label class="form-check-label" for="soloNinosRadio">Sólo con niños</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="convivencia" id="soloAnimalesRadio" value="solo-animales">
-          <label class="form-check-label" for="soloAnimalesRadio">Sólo con animales</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="convivencia" id="animalesNinosRadio" value="animales-ninos">
-          <label class="form-check-label" for="animalesNinosRadio">Vivo con animales y niños</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="convivencia" id="sinAnimalesNinosRadio" value="sin-animales-ninos">
-          <label class="form-check-label" for="sinAnimalesNinosRadio">No vivo con animales ni con niños</label>
-        </div>
-        <!-- Agregar otras opciones -->
-      </div>
-    
-      <div class="mb-3" id="question-genero" style="display: none;">
-        <label class="form-label">¿Estás buscando adoptar macho o hembra?</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="genero" id="machoRadio" value="macho" onchange="showNextQuestion('genero')">
-          <label class="form-check-label" for="machoRadio">Quiero un macho</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="genero" id="hembraRadio" value="hembra">
-          <label class="form-check-label" for="hembraRadio">Quiero una hembra</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="genero" id="cualquierGeneroRadio" value="cualquier-genero">
-          <label class="form-check-label" for="cualquierGeneroRadio">Me da igual</label>
-        </div>
-        <!-- Agregar otras opciones -->
-      </div>
-    
-      <div class="mb-3" id="question-edad" style="display: none;">
-        <label class="form-label">¿Qué rango de edad quieres que tenga tu nueva mascota?</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="edad" id="hasta1Radio" value="hasta-1">
-          <label class="form-check-label" for="hasta1Radio">Hasta 1 año</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="edad" id="1a5Radio" value="1-a-5">
-          <label class="form-check-label" for="1a5Radio">1 a 5 años</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="edad" id="6a10Radio" value="6-a-10">
-          <label class="form-check-label" for="6a10Radio">6 a 10 años</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="edad" id="cualquierEdadRadio" value="cualquier-edad">
-          <label class="form-check-label" for="cualquierEdadRadio">De cualquier edad</label>
-        </div>
-        <!-- Agregar otras opciones -->
-      </div>
-    
-      <button type="submit" class="btn btn-primary">Siguiente</button>
-    </form>
-    
-    <script>
-      function showNextQuestion(question) {
-        const selectedValue = document.querySelector(`input[name="${question}"]:checked`).value;
-    
-        if (question === "vivienda") {
-          document.getElementById("question-convivencia").style.display = "block";
-        } else if (question === "convivencia") {
-          document.getElementById("question-genero").style.display = "block";
-        } else if (question === "genero") {
-          document.getElementById("question-edad").style.display = "block";
-        }
-      }
-    </script>
+    <!-- Contenedor de formulario -->
+    <div class="container my-4">
 
+      <form id="search-form">
+        <div class="mb-3">
+          <label class="form-label">Donde vivirá?</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="vivienda" id="casaPatioRadio" value="casa-patio" onchange="showNextQuestion('vivienda')">
+            <label class="form-check-label" for="casaPatioRadio">Casa con patio</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="vivienda" id="dptoMedianoRadio" value="dpto-mediano">
+            <label class="form-check-label" for="dptoMedianoRadio">Dpto Chico o Mediano</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="vivienda" id="dptoGrandeRadio" value="dpto-grande">
+            <label class="form-check-label" for="dptoGrandeRadio">Dpto Grande</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="vivienda" id="parcelaRadio" value="parcela">
+            <label class="form-check-label" for="parcelaRadio">Parcela</label>
+          </div>
+          <!-- Agregar otras opciones -->
+        </div>
+      
+        <div class="mb-3" id="question-convivencia" style="display: none;">
+          <label class="form-label">¿Vives con más animales y/o niños?</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="convivencia" id="soloNinosRadio" value="solo-ninos" onchange="showNextQuestion('convivencia')">
+            <label class="form-check-label" for="soloNinosRadio">Sólo con niños</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="convivencia" id="soloAnimalesRadio" value="solo-animales">
+            <label class="form-check-label" for="soloAnimalesRadio">Sólo con animales</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="convivencia" id="animalesNinosRadio" value="animales-ninos">
+            <label class="form-check-label" for="animalesNinosRadio">Vivo con animales y niños</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="convivencia" id="sinAnimalesNinosRadio" value="sin-animales-ninos">
+            <label class="form-check-label" for="sinAnimalesNinosRadio">No vivo con animales ni con niños</label>
+          </div>
+          <!-- Agregar otras opciones -->
+        </div>
+      
+        <div class="mb-3" id="question-genero" style="display: none;">
+          <label class="form-label">¿Estás buscando adoptar macho o hembra?</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="genero" id="machoRadio" value="macho" onchange="showNextQuestion('genero')">
+            <label class="form-check-label" for="machoRadio">Quiero un macho</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="genero" id="hembraRadio" value="hembra">
+            <label class="form-check-label" for="hembraRadio">Quiero una hembra</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="genero" id="cualquierGeneroRadio" value="cualquier-genero">
+            <label class="form-check-label" for="cualquierGeneroRadio">Me da igual</label>
+          </div>
+          <!-- Agregar otras opciones -->
+        </div>
+      
+        <div class="mb-3" id="question-edad" style="display: none;">
+          <label class="form-label">¿Qué rango de edad quieres que tenga tu nueva mascota?</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="edad" id="hasta1Radio" value="hasta-1">
+            <label class="form-check-label" for="hasta1Radio">Hasta 1 año</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="edad" id="1a5Radio" value="1-a-5">
+            <label class="form-check-label" for="1a5Radio">1 a 5 años</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="edad" id="6a10Radio" value="6-a-10">
+            <label class="form-check-label" for="6a10Radio">6 a 10 años</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="edad" id="cualquierEdadRadio" value="cualquier-edad">
+            <label class="form-check-label" for="cualquierEdadRadio">De cualquier edad</label>
+          </div>
+          <!-- Agregar otras opciones -->
+        </div>
+      
+        <button type="submit" class="btn btn-primary">Siguiente</button>
+      </form>
+      
+      <script>
+        function showNextQuestion(question) {
+          const selectedValue = document.querySelector(`input[name="${question}"]:checked`).value;
+      
+          if (question === "vivienda") {
+            document.getElementById("question-convivencia").style.display = "block";
+          } else if (question === "convivencia") {
+            document.getElementById("question-genero").style.display = "block";
+          } else if (question === "genero") {
+            document.getElementById("question-edad").style.display = "block";
+          }
+        }
+      </script>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="js/navbar.js"></script>
     <script src="js/script.js"></script>
