@@ -29,7 +29,7 @@ const navbar =
                     <a class="nav-link" href="quienes-somos.html">Quienes Somos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="reportes.html">Generar Reportes</a>
+                    <a class="nav-link" href="reportes.html">Generar Alertas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="reportes-plus.html">ReportesPLUS</a>
