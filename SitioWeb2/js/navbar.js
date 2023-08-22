@@ -45,3 +45,13 @@ const navbar =
 // Insertamos navbar en header
 const header = document.getElementById('nav-placeholder');
 header.insertAdjacentHTML('afterbegin', navbar);
+
+// Añade un evento al botón de hamburguesa
+const sidebarCollapseButton = document.getElementById('sidebarCollapse');
+sidebarCollapseButton.addEventListener('click', () => {
+    const sidebar = document.querySelector('.sidebar');
+    const content = document.getElementById('content');
+    
+    sidebar.classList.toggle('active');
+    content.classList.toggle('active');
+});

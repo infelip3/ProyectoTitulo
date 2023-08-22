@@ -31,8 +31,8 @@
 
       <form id="search-form">
         <div class="mb-3">
-          <label class="form-label">Donde vivirá?</label>
-          <img src="images\formulario\vivienda.jpg" alt="Imagen" id="question-image" class="float-end">
+          <label class="form-label" id="question-vivienda">Donde vivirá?</label>
+          <img src="images\formulario\vivienda.jpg" alt="Imagen" id="question-image-vivienda" class="float-end question-image">
           <div class="form-check">
             <input class="form-check-input" type="radio" name="vivienda" id="casaPatioRadio" value="casa-patio" onchange="showNextQuestion('vivienda')">
             <label class="form-check-label" for="casaPatioRadio">Casa con patio</label>
@@ -53,8 +53,8 @@
         </div>
       
         <div class="mb-3" id="question-convivencia" style="display: none;">
-          <label class="form-label">¿Vives con más animales y/o niños?</label>
-          <img src="images\formulario\convivencia.jpg" alt="Imagen" id="question-image" class="float-end">
+          <label class="form-label" id="question-label-convivencia">¿Vives con más animales y/o niños?</label>
+          <img src="images\formulario\convivencia.jpg" alt="Imagen" id="question-image-convivencia" class="float-end question-image">
           <div class="form-check">
             <input class="form-check-input" type="radio" name="convivencia" id="soloNinosRadio" value="solo-ninos" onchange="showNextQuestion('convivencia')">
             <label class="form-check-label" for="soloNinosRadio">Sólo con niños</label>
@@ -75,8 +75,8 @@
         </div>
       
         <div class="mb-3" id="question-genero" style="display: none;">
-          <label class="form-label">¿Estás buscando adoptar macho o hembra?</label>
-          <img src="images\formulario\genero.jpg" alt="Imagen" id="question-image" class="float-end">
+          <label class="form-label" id="question-label-genero">¿Estás buscando adoptar macho o hembra?</label>
+          <img src="images\formulario\genero.jpg" alt="Imagen" id="question-image-genero" class="float-end question-image">
           <div class="form-check">
             <input class="form-check-input" type="radio" name="genero" id="machoRadio" value="macho" onchange="showNextQuestion('genero')">
             <label class="form-check-label" for="machoRadio">Quiero un macho</label>
@@ -93,8 +93,8 @@
         </div>
       
         <div class="mb-3" id="question-edad" style="display: none;">
-          <label class="form-label">¿Qué rango de edad quieres que tenga tu nueva mascota?</label>
-          <img src="images\formulario\edad.jpg" alt="Imagen" id="question-image" class="float-end">
+          <label class="form-label" id="question-label-edad">¿Qué rango de edad quieres que tenga tu nueva mascota?</label>
+          <img src="images\formulario\edad.jpg" alt="Imagen" id="question-image-edad" class="float-end question-image">
           <div class="form-check">
             <input class="form-check-input" type="radio" name="edad" id="hasta1Radio" value="hasta-1">
             <label class="form-check-label" for="hasta1Radio">Hasta 1 año</label>
@@ -113,6 +113,13 @@
           </div>
           <!-- Agregar otras opciones -->
         </div>
+
+        <div class="mb-3" id="question-ubicacion" style="display: none;">
+          <label class="form-label" id="question-label-ubicacion">¿En que region estas buscando a tu mascota?</label>
+          <select id="region" onchange="cargarCiudades()"></select>
+          <select id="ciudad" onchange="cargarComunas()"></select>
+          <select id="comuna"></select>
+      </div>
       
         <button type="submit" class="btn btn-primary">Siguiente</button>
       </form>
@@ -153,10 +160,36 @@
         },
     // Agrega más preguntas e imágenes aquí
         };
+        function showNextQuestion(question) {
+    const selectedValue = document.querySelector(`input[name="${question}"]:checked`).value;
 
+    // Mostrar la siguiente pregunta
+    if (question === "vivienda") {
+      document.getElementById("question-convivencia").style.display = "block";
+      updateQuestionAndImage("convivencia");
+    } else if (question === "convivencia") {
+      document.getElementById("question-genero").style.display = "block";
+      updateQuestionAndImage("genero");
+    } else if (question === "genero") {
+      document.getElementById("question-edad").style.display = "block";
+      updateQuestionAndImage("edad");
+    }
+  }
+
+  function updateQuestionAndImage(question) {
+    const currentQuestion = preguntasEImagenes[question];
+    const questionLabel = document.getElementById(`question-label-${question}`);
+    const questionImage = document.getElementById(`question-image-${question}`);
+
+    if (currentQuestion && questionLabel && questionImage) {
+        questionLabel.textContent = currentQuestion.pregunta;
+        questionImage.src = currentQuestion.imagen;
+    }
+}
       </script>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="js/ubicacion.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/script.js"></script>
 </body>

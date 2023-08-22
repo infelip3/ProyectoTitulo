@@ -108,4 +108,26 @@ var ubicaciones = {
   
   // Llamar a la función cargarRegiones al cargar la página
   window.onload = cargarRegiones;
+
+  function cargarUbicacion() {
+    var selectUbicacion = document.getElementById("ubicacion");
+
+    // Recorrer las regiones y agregar las opciones al select
+    for (var i = 0; i < ubicaciones.regiones.length; i++) {
+        var opcion = document.createElement("option");
+        opcion.value = i;
+        opcion.text = ubicaciones.regiones[i].nombre;
+        selectUbicacion.appendChild(opcion);
+    }
+
+    // Asignar un evento onchange al select de ubicación
+    selectUbicacion.onchange = cargarCiudades;
+
+    // Mostrar la pregunta y la primera ubicación por defecto
+    document.getElementById("question-ubicacion").style.display = "block";
+    cargarCiudades();
+}
+
+// Llamar a la función cargarUbicacion al cargar la página
+window.onload = cargarUbicacion;
   
