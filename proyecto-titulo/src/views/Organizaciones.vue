@@ -1,0 +1,351 @@
+<template>
+  <div>
+    <!-- Contenedor de organizaciones -->
+    <div class="container my-4">
+
+      <!-- Imagen izquierda, contenido a la derecha -->
+      <div class="row align-items-center">
+        <div class="col">
+          <img class="img-fluid" src="images/Fundaciones/FundaciónCallejerosBuscanHogar.png" />
+        </div>
+        <div class="col">
+          <h2 class="featureItem__title">Fundación Callejeros Buscan Hogar</h2>
+          <p>Somos un grupo de voluntarios que rescatamos animales en total abandono o maltrato, los rehabilitamos, los
+            esterilizamos , sanamos y volvemos a pegar sus corazones rotos, por tanta maldad, y les buscamos las mejores
+            familias para ellos.</p>
+          <p>Somos un Fundaci&oacute;n sin fines de lucro, nuestro fuerza nos la dan ellos al verlos con una familia de
+            verdad.</p>
+          <a href="http://www.fundacioncbh.cl" target="_blank">
+            <button type="button" class="btn btn-primary">Ir al sitio web</button>
+          </a>
+          <a href="mailto:contacto@fundacioncbh.cl">
+            <button type="button" class="btn btn-primary">contacto@fundacioncbh.cl</button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Imagen derecha, contenido a la izquierda -->
+      <div class="row align-items-center mt-4">
+        <div class="col">
+          <h2 class="featureItem__title">Fundación Julieta</h2>
+          <p>Julieta es una mestiza de pastor alem&aacute;n rescatada que inspir&oacute; la creaci&oacute;n de
+            Fundaci&oacute;n Julieta, organizaci&oacute;n dedicada al rescate de perros y gatos abandonados, su
+            rehabilitaci&oacute;n, sociabilizaci&oacute;n, esterilizaci&oacute;n y adopci&oacute;n. Creemos que la
+            &uacute;nica forma de frenar el abandono animal es mediante la educaci&oacute;n y el desarrollo de la
+            empat&iacute;a y compasi&oacute;n hacia los animales desde los ni&ntilde;os. Nuestro mensaje es el bienanimal.
+          </p>
+          <a href="http://www.fundacionjulieta.cl/">
+            <button type="button" class="btn btn-primary">Ir al sitio web</button>
+          </a>
+          <a href="mailto:quieroadoptar@fundacionjulieta.cl">
+            <button type="button" class="btn btn-primary">quieroadoptar@fundacionjulieta.cl</button>
+          </a>
+        </div>
+        <div class="col">
+          <img class="img-fluid" src="images/Fundaciones/FundaciónJulieta.png" />
+        </div>
+      </div>
+
+      <!-- Imagen izquierda, contenido a la derecha -->
+      <div class="row align-items-center">
+        <div class="col">
+          <img class="img-fluid" src="images/Fundaciones/FundaciónAlmaAnimaldeRancagua.jpg" />
+        </div>
+        <div class="col">
+          <h2 class="featureItem__title">Fundación Alma Animal de Rancagua</h2>
+          <p>Agrupaci&oacute;n animalista que busca mejorar las condiciones de vida de perros, gatos en situaci&oacute;n
+            de abandono, crear conciencia y educar sobre la tenencia responsable de mascotas.</p>
+          <a href="https://www.facebook.com/Alma-animal-Rancagua-Offical-450764244961909/"><button type="button"
+              class="btn btn-primary">Ir al sitio web</button> </a>
+          <a href="mailto:almaanimalrancagua@gmail.com"><button type="button"
+              class="btn btn-primary">almaanimalrancagua@gmail.com</button></a>
+        </div>
+      </div>
+
+      <!-- Imagen derecha, contenido a la izquierda -->
+      <div class="row align-items-center mt-4">
+        <div class="col-6">
+          <h2 class="featureItem__title">Sociedad Protectora de Animales Osorno</h2>
+          <p>Es una organizaci&oacute;n sin fines de lucro que se constituy&oacute; legalmente el 22 de noviembre de 1992,
+            bajo la personalidad jur&iacute;dica Municipal Nro.192-F, cuyo fin es ayudar a los animales, en especial a los
+            abandonados.</p>
+          <a href="https://www.facebook.com/groups/379946608854836/?fref=ts"><button type="button"
+              class="btn btn-primary">Ir al sitio web</button> </a>
+          <a href="mailto:animalesosorno@gmail.com"><button type="button"
+              class="btn btn-primary">animalesosorno@gmail.com</button></a>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+          <img class="img-fluid" src="images/Fundaciones/SociedadProtectoradeAnimalesOsorno.jpg" />
+        </div>
+      </div>
+
+      <!-- Imagen izquierda, contenido a la derecha -->
+      <div class="row align-items-center">
+        <div class="col">
+          <img class="img-fluid" src="images/Fundaciones/FundaciónConcienciaAnimaldeRengo.jpg" />
+        </div>
+        <div class="col">
+          <h2 class="featureItem__title">Fundación Conciencia Animal de Rengo</h2>
+          <p>Hace un tiempo un grupo de personas decidieron dejar las palabras a un lado y actuar frente a tanta miseria
+            que viven muchos animalitos de Rengo, principalmente, por la indiferencia y la &ldquo;tenencia
+            irresponsable&rdquo; hacia aquellos que un d&iacute;a fueron mascotas, o que simplemente nacieron en un
+            c&iacute;rculo indolente. Conciencia Animal tiene el &ldquo;motor del amor&rdquo;, ya que el &uacute;nico fin
+            de esta entidad, es ir en ayuda de los animalitos que sufren y que reciben de nuestra sociedad, golpes,
+            maltrato e indiferencia.</p>
+          <a href="https://www.facebook.com/conciencia.rengo"><button type="button" class="btn btn-primary">Ir al sitio
+              web</button> </a>
+          <a href="julia.espinoza.carrasco@gmail.com"><button type="button"
+              class="btn btn-primary">julia.espinoza.carrasco@gmail.com</button></a>
+        </div>
+      </div>
+
+      <!-- Imagen derecha, contenido a la izquierda -->
+      <div class="row align-items-center mt-4">
+        <div class="col-6">
+          <h2 class="featureItem__title">Fundación Canes y felinos</h2>
+          <p>Canes y Felinos Temuco es una organizaci&oacute;n no gubernamental, sin fines de lucro, que tiene por
+            misi&oacute;n fomentar la tenencia responsable de mascotas y disminuir la sobrepoblaci&oacute;n de fauna
+            urbana existente en la Regi&oacute;n de La Araucan&iacute;a, principalmente en la comuna de Temuco.</p>
+          <p>Es una organizaci&oacute;n con una preocupaci&oacute;n p&uacute;blica, social, cuyo quehacer no puede
+            reducirse exclusivamente a los &ldquo;animales&rdquo;, ya que el abandono de estos facilita, adem&aacute;s,
+            problemas de orden sanitario que repercuten en toda la comunidad.</p>
+          <a href="http://www.canesyfelinos.com/"><button type="button" class="btn btn-primary">Ir al sitio web</button>
+          </a>
+          <a href="mailto:contacto@canesyfelinos.com"><button type="button"
+              class="btn btn-primary">contacto@canesyfelinos.com</button></a>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+          <img class="img-fluid" src="images/Fundaciones/FundaciónCanesyfelinos.png" />
+        </div>
+      </div>
+
+      <!-- Imagen izquierda, contenido a la derecha -->
+      <div class="row align-items-center">
+        <div class="col">
+          <img class="img-fluid" src="images/Fundaciones/FundaciónStuka.png" />
+        </div>
+        <div class="col">
+          <h2 class="featureItem__title">Fundación Stuka</h2>
+          <p>La ciencia del Bienestar Animal no es un tema nuevo, pero ha ido cobrando cada vez m&aacute;s importancia,
+            tanto en el mundo cient&iacute;fico como en las personas interesadas en brindar una calidad de vida cada vez
+            mejor a nuestros animales de compa&ntilde;&iacute;a. En Fundaci&oacute;n Stuka nos interesamos en aplicar la
+            ciencia del Bienestar Animal a cabalidad, esforz&aacute;ndonos por brindarles a nuestros perros (por el tiempo
+            que se encuentren con nosotros) las mejores condiciones sanitarias, emocionales y naturales, para que, llegado
+            el momento de la adopci&oacute;n, lleguen a sus nuevos hogares como individuos sanos y educados.</p>
+          <a href="http://www.fundacionstuka.cl/"><button type="button" class="btn btn-primary">Ir al sitio web</button>
+          </a>
+          <a href="contacto@fundacionstuka.cl"><button type="button"
+              class="btn btn-primary">contacto@fundacionstuka.cl</button></a>
+        </div>
+      </div>
+
+      <!-- Imagen derecha, contenido a la izquierda -->
+      <div class="row align-items-center mt-4">
+        <div class="col-6">
+          <h2 class="featureItem__title">Fundación garras y patas</h2>
+          <p>En la Fundaci&oacute;n Garras y Patas somos un grupo de personas unidas por la sensibilidad hacia el problema
+            de la sobrepoblaci&oacute;n de mascotas abandonadas, contamos con un Directorio que dirige la
+            Fundaci&oacute;n, l&iacute;deres que coordinan las diversas actividades que se realizan y voluntarios activos
+            todos trabajamos gratis y en nuestro tiempo libre.</p>
+          <p>La Fundaci&oacute;n se dedica al rescate, recuperaci&oacute;n, readaptaci&oacute;n y posterior
+            reinserci&oacute;n en nuevos hogares, de perros y gatos abandonados y a la recaudaci&oacute;n de fondos para
+            estos fines. Contamos actualmente con voluntarios activos, socios aportantes de dinero, variados auspiciadores
+            y gran presencia en las redes sociales.</p>
+          <p>Esto ha generado un gran contacto con la comunidad, cuyos miembros nos escriben en forma constante
+            solicitando ayuda y consejos, con lo cual cumplimos adem&aacute;s un rol educativo en la tenencia responsable
+            de mascotas, la necesidad de esterilizaci&oacute;n y educaci&oacute;n de las mismas.</p>
+          <p>Asimismo la Fundaci&oacute;n realiza muchas actividades para conseguir que sus rescatados sean adoptados,
+            tales como constantes publicaciones en internet y jornadas mensuales de adopci&oacute;n, las cuales cuentan
+            con gran difusi&oacute;n.</p>
+          <a href="http://www.garrasypatas.cl/"><button type="button" class="btn btn-primary">Ir al sitio web</button>
+          </a>
+          <a href="mailto:contacto@garrasypatas.cl"><button type="button"
+              class="btn btn-primary">contacto@garrasypatas.cl</button></a>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+          <img class="img-fluid" src="images/Fundaciones/Fundacióngarrasypatas.png" />
+        </div>
+      </div>
+
+      <!-- Imagen izquierda, contenido a la derecha -->
+      <div class="row align-items-center">
+        <div class="col">
+          <img class="img-fluid" src="images/Fundaciones/FundaciónChileMestizo.jpg" />
+        </div>
+        <div class="col">
+          <h2 class="featureItem__title">Fundación Chile Mestizo</h2>
+          <p>Fundaci&oacute;n Chile Mestizo es una agrupaci&oacute;n formada por personas preocupadas del bienestar
+            animal, especialmente de perros, con a&ntilde;os de experiencia en rescate, rehabilitaci&oacute;n y
+            adopci&oacute;n.</p>
+          <p>Nuestra misi&oacute;n es rescatar animales en situaci&oacute;n de riesgo y abandono, especialmente perros
+            discapacitados que les es imposible sobrevivir en la calle, esterilizarlos, rehabilitarlos e incorporarlos a
+            familias definitivas. Otra &aacute;rea importante de nuestra gesti&oacute;n es dar la oportunidad de tener un
+            final digno a perros ancianos terminales abandonados en un hogar de acogida con todos los cuidados requeridos
+            seg&uacute;n su condici&oacute;n.</p>
+          <a href="http://www.chilemestizo.cl/"><button type="button" class="btn btn-primary">Ir al sitio web</button>
+          </a>
+          <a href="chilemestizo@gmail.com"><button type="button"
+              class="btn btn-primary">chilemestizo@gmail.com</button></a>
+        </div>
+      </div>
+
+      <!-- Imagen derecha, contenido a la izquierda -->
+      <div class="row align-items-center mt-4">
+        <div class="col-6">
+          <h2 class="featureItem__title">Corporación Mirada Animal</h2>
+          <p>Mirada Animal Chile es una corporaci&oacute;n que nace en 2014 destinada a trabajar por el bienestar animal y
+            promover el respeto y la tenencia responsable de animales de compa&ntilde;&iacute;a, especialmente en
+            condici&oacute;n de abandono, rescatando y mejorando las condiciones sanitarias, educando y generando
+            conciencia en la poblaci&oacute;n. El equipo de Mirada Animal Chile est&aacute; conformado por un directorio y
+            l&iacute;deres en distintas &aacute;reas relacionadas con el quehacer de la Corporaci&oacute;n. Asimismo, hay
+            detr&aacute;s de este equipo, un valioso y fundamental grupo de voluntarios y voluntarias.</p>
+          <p>En nuestro refugio (Refugio Esperanza), ubicado en la comuna de Padre Hurtado, albergamos a m&aacute;s de 120
+            perritos de distintos tama&ntilde;os, edades y caracter&iacute;sticas. Nuestra meta final es que cada uno de
+            ellos encuentre una familia definitiva, cerrando as&iacute; el ciclo al construir para ellos un futuro lleno
+            de amor y cuidados de por vida.</p>
+          <p>Para llevar a cabo nuestra obra, y asegurar los recursos necesarios, generamos diversas actividades,
+            participamos en jornadas de adopci&oacute;n y buscamos el apoyo de socios colaboradores, padrinos y
+            voluntarios.</p>
+          <a href="http://www.miradaanimal.cl"><button type="button" class="btn btn-primary">Ir al sitio web</button> </a>
+          <a href="mailto:miradaanimalchile@gmail.com"><button type="button"
+              class="btn btn-primary">miradaanimalchile@gmail.com</button></a>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+          <img class="img-fluid" src="images/Fundaciones/CorporaciónMiradaAnimal.png" />
+        </div>
+      </div>
+
+      <!-- Imagen izquierda, contenido a la derecha -->
+      <div class="row align-items-center">
+        <div class="col">
+          <img class="img-fluid" src="images/Fundaciones/UnióndeAmigosdelosAnimales.jpg" />
+        </div>
+        <div class="col">
+          <h2 class="featureItem__title">Fundación Unión de Amigos de los Animales</h2>
+          <p>La UAA ( Uni&oacute;n de Amigos de los Animales ) desde 1955 que trabaja por la educaci&oacute;n, rescate y
+            rehabilitaci&oacute;n de animales en situaci&oacute;n de vulnerabilidad. Creemos que la &uacute;nica forma de
+            solucionar el problema del abandono y maltrato animal, es a trav&eacute;s de la esterilizaci&oacute;n y la
+            educaci&oacute;n de la comunidad. Nuestro refugio mantiene 200 mascotas entre perros y gatos.</p>
+          <a href="http://www.uaa.cl/"><button type="button" class="btn btn-primary">Ir al sitio web</button> </a>
+          <a href="adopciones@uaa.cl"><button type="button" class="btn btn-primary">adopciones@uaa.cl</button></a>
+        </div>
+      </div>
+
+      <!-- Imagen derecha, contenido a la izquierda -->
+      <div class="row align-items-center mt-4">
+        <div class="col-6">
+          <h2 class="featureItem__title">Fundación Ayudando Peluditos Chile</h2>
+          <p>Ayudando Peluditos Chile es una agrupaci&oacute;n creada el a&ntilde;o 2013 constituida por 9 integrantes,
+            cuya finalidad es el rescate de animales en situaci&oacute;n de riesgo, su tratamiento y la reinserci&oacute;n
+            en nuevas familias. Esta inquietud surgi&oacute; con el fin de poder contribuir a satisfacer la necesidad de
+            los callejeros, la cual es inmensa; abandono, hambre, enfermedades, malos tratos de personas y una gran falta
+            de cultura hacia el cuidado animal.</p>
+          <p>En los a&ntilde;os que lleva en pie este hermoso proyectos hemos podido ayudar a 100 perritos y 70 gatitos,
+            que han encontrado familias definitivas.</p>
+          <p>Actualmente tenemos perritos y gatitos que esperan encontrar un hogar y que se encuentran en hogares
+            temporales pagados. Para poder seguir ayudando y solventando los gastos de mantenci&oacute;n de estos
+            Peluditos, necesitamos de la ayuda de todos ya sea haci&eacute;ndose socio de la agrupaci&oacute;n, apoyando
+            casos individuales o siendo voluntario.</p>
+          <a href="https://www.facebook.com/AyudandoPeluditosChile/"><button type="button" class="btn btn-primary">Ir al
+              sitio web</button> </a>
+          <a href="mailto:monseguajardo@gmail.com"><button type="button"
+              class="btn btn-primary">monseguajardo@gmail.com</button></a>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+          <img class="img-fluid" src="images/Fundaciones/FundaciónAyudandoPeluditosChile.jpg" />
+        </div>
+      </div>
+
+      <!-- Imagen izquierda, contenido a la derecha -->
+      <div class="row align-items-center">
+        <div class="col">
+          <img class="img-fluid" src="images/Fundaciones/PatitasCansadas.jpg" />
+        </div>
+        <div class="col-6">
+          <h2 class="featureItem__title">Patitas Cansadas</h2>
+          <p>PCAA&nbsp;Patitas Cansadas Ayuda Animal, nace desde el amor y el respeto de un grupo de personas hacia los
+            animales no humanos. Nos une la convicci&oacute;n de ayudar a cambiar el destino de aquellos que han vivido
+            situaciones de maltrato, abandono, enfermedad o discriminaci&oacute;n.
+          </p>
+          <p>Existen miles de ellos en las calles tratando de sobrevivir: mestizos, de razas, cachorros, adultos,
+            ancianos.</p>
+          <p>Hemos asumido la labor de rescatarlos, cubrir sus necesidades de salud, alimentaci&oacute;n y
+            rehabilitaci&oacute;n para posteriormente reubicarlos con familias responsables y comprometidas a brindarles
+            una segunda oportunidad como miembro de su grupo familiar.</p>
+          <p>Anhelamos contribuir a despertar en la comunidad el inter&eacute;s por conocer este mundo y que consideren la
+            posibilidad de Adoptar dando un m&aacute;gico vuelco en la vida de un ser que ha vivido la crueldad del
+            abandono, a cambio ser&aacute; un compa&ntilde;ero/a fiel de vida.</p>
+          <a href="http://www.patitascansadas.cl/"><button type="button" class="btn btn-primary">Ir al sitio web</button>
+          </a>
+          <a href="mailto:pcaa.adopciones@gmail.com"><button type="button"
+              class="btn btn-primary">pcaa.adopciones@gmail.com</button></a>
+        </div>
+      </div>
+
+      <!-- Imagen derecha, contenido a la izquierda -->
+      <div class="row align-items-center mt-4">
+        <div class="col-6">
+          <h2 class="featureItem__title">Agrupación Perritos de Rinconada de Maipú</h2>
+          <p>Perritos de Rinconada, es una agrupaci&oacute;n sin fines de lucro dedicada al rescate,
+            rehabilitaci&oacute;n, esterilizaci&oacute;n y adopci&oacute;n de perritos y gatitos en situaci&oacute;n de
+            abandono en un sector rural de la comuna de Maip&uacute;, en donde los perritos viven solos, pero en
+            comunidad. La alimentaci&oacute;n y los cuidados de los perritos est&aacute; a cargo de voluntarios, a los
+            cuales llamamos &ldquo;T&iacute;os&rdquo; que se preocupan de asistirlos semanalmente, llevarles casas y
+            mantas para el frio, desparasitarlos y curar enfermedades, &nbsp;esta labor no ser&iacute;a posible sin los
+            aportes que nos hacen llegar distintas personas que se han conmovido con nuestra labor, lamentablemente no es
+            permanente, por lo que la difusi&oacute;n de nuestro prop&oacute;sito es fundamental.</p>
+          <p>Perritos de Rinconada al no ser un refugio, sino un sitio eriazo donde los perritos llegan por distintos
+            motivos, la pronta adopci&oacute;n pasa a tomar un rol primordial buscando, &nbsp;de esta manera, &nbsp;darles
+            una oportunidad de experimentar el amor de hogar. Nos preocupamos de hacer seguimiento a cada una de las
+            adopciones, velando por el cuidado de cada uno de los perritos. Junto con &nbsp;adoptar, tenemos la tarea de
+            educar y crear conciencia sobre la tenencia responsable, aportando nuestra peque&ntilde;a semilla contra el
+            abandono y maltrato animal.</p>
+          <a href="https://www.facebook.com/Agrupacion-Perritos-De-Rinconada-Maipu-577780325611244/"><button type="button"
+              class="btn btn-primary">Ir al sitio web</button> </a>
+          <a href="mailto:adoptaperritosderinconada@gmail.com"><button type="button"
+              class="btn btn-primary">adoptaperritosderinconada@gmail.com</button></a>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-3">
+          <img class="img-fluid" src="images/Fundaciones/AgrupaciónPerritosdeRinconadadeMaipu.jpg" />
+        </div>
+      </div>
+
+      <!-- Imagen izquierda, contenido a la derecha -->
+      <div class="row align-items-center">
+        <div class="col">
+          <img class="img-fluid" src="images/Fundaciones/FundaciónAdoptaunAmigoOsorno.jpg" />
+        </div>
+        <div class="col">
+          <h2 class="featureItem__title">Fundación Adopta un Amigo Osorno</h2>
+          <p>Agrupaci&oacute;n sin fines de lucro, fundada el 08 de noviembre de 2014 en la Ciudad de Osorno, con
+            Personalidad Jur&iacute;dica Municipal F-3436. Nuestra organizaci&oacute;n nace de la preocupaci&oacute;n y
+            necesidad de frenar el abandono, maltrato e indiferencia hacia los animales, principalmente perros y gatos. Se
+            ha convertido en nuestra misi&oacute;n promover el respeto y bienestar animal, asimismo so&ntilde;amos que
+            llegar&aacute; un d&iacute;a en que ya no ser&aacute; necesario de nuestra ayuda porque todos seremos parte de
+            este cambio.</p>
+          <p>Entre nuestras actividades destaca&nbsp; rescate y rehabilitaci&oacute;n animal, Jornadas de adopci&oacute;n,
+            seguimiento a los rescatados, incentivo a la esterilizaci&oacute;n como m&eacute;todo para acabar con el
+            abandono, educaci&oacute;n en tenencia de mascotas, postulaci&oacute;n a fondos concursales, difusi&oacute;n
+            de nuestras actividades y casos en redes sociales, b&uacute;squeda de colaboradores y socios, adem&aacute;s de
+            actividades de financiamiento.</p>
+          <p>Nuestra meta es que no existan animales&nbsp; abandonados, buscamos que cada rescatado tenga un hogar
+            temporal o en el mejor de los casos un hogar definitivo para pasar el resto de su vida.</p>
+          <p>Una mascota es un eterno compa&ntilde;ero que ser&aacute; parte de nuestras vidas, ellos necesitan conocer el
+            amor en familia y que los protejan, entreguemos un hogar a estos rescatados.&nbsp;&nbsp;</p>
+          <a href="https://www.facebook.com/groups/adoptaunamigoosorno/"><button type="button" class="btn btn-primary">Ir
+              al sitio web</button> </a>
+          <!--<a href="mailto:"><button type="button" class="btn btn-primary"></button></a>-->
+        </div>
+      </div>
+
+
+    </div>
+    <!-- Termina container -->
+  </div>
+</template>
