@@ -1,7 +1,27 @@
-/* Estilos especificos */
-.container-navbar .navbar-brand {
-  width: 3rem;
+:root {
+  --navbar-height: 80px;
 }
+
+.navbar{
+  height: var(--navbar-height);
+
+  .navbar-brand {
+    width: 60px;
+  }
+}
+
+.carousel {
+  height: calc(100vh - var(--navbar-height));
+
+  .carousel-inner {
+    height: 100%;
+  }
+}
+
+/* Estilos especificos */
+// .container-navbar .navbar-brand {
+//   width: 3rem;
+// }
 
 // .card-img-top {
 //   width: 100%;

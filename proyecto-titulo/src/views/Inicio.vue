@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-content">
     <div id="carouselExampleIndicators" class="carousel slide">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
@@ -11,36 +11,24 @@
       </div>
       <div class="carousel-inner h-100">
         <div class="carousel-item active">
-          <img src="/images/Carrusel/perrolentes.jpg" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Guau Guau!.</h5>
-            <p>Miau Miau.</p>
-          </div>
+          <img src="/images/slider/01.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="/images/Carrusel/perro3.jpg" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Guau Guau!.</h5>
-            <p>Miau Miau.</p>
-          </div>
+          <img src="/images/slider/02.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="/images/Carrusel/abandonocaja.jpg" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Guau Guau!.</h5>
-            <p>Miau Miau.</p>
-          </div>
+          <img src="/images/slider/03.jpg" class="d-block w-100" alt="...">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
         data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="visually-hidden">Anterior</span>
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
         data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span class="visually-hidden">Siguiente</span>
       </button>
     </div>
   </div>
