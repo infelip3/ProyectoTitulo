@@ -112,10 +112,10 @@ const organizations = [
   <div class="organizations">
     <div v-for="organization of organizations" class="item">
       <img :src="`images/organizations/${organization.image}`" class="card-img-top" alt="">
-      <div>
+      <div class="content">
         <h4>{{ organization.title }}</h4>
         <p>{{ organization.description }}</p>
-        <div class="btn-group" role="group" aria-label="Basic example">
+        <div class="btn-group" role="group">
           <a :href="organization.url" target="_blank" class="btn btn-primary">Ir al sitio</a>
           <a v-if="organization.email" :href="`mailto:${organization.email}`" target="_blank" class="btn btn-info">{{ organization.email }}</a>
         </div>
@@ -137,12 +137,16 @@ const organizations = [
       flex-direction: column;
       align-items: center;
       justify-content: space-evenly;
-      gap: 30px;
+      gap: 20px;
 
       padding: 2rem;
       border: 1px solid #ccc;
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+      .content {
+        width: 100%;
+      }
     }
   }
 </style>
