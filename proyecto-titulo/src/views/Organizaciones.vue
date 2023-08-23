@@ -2,6 +2,14 @@
 const organizations = [
   {
     title: 'Fundación Callejeros Buscan Hogar',
+    paragraphs: [
+      {
+        content: 'contenido parrafo 1'
+      },
+      {
+        content: 'contenido parrafo 2'
+      },
+    ],
     description: 'Somos un grupo de voluntarios que rescatamos animales en total abandono o maltrato, los rehabilitamos, los esterilizamos , sanamos y volvemos a pegar sus corazones rotos, por tanta maldad, y les buscamos las mejores familias para ellos. Somos un Fundación sin fines de lucro, nuestro fuerza nos la dan ellos al verlos con una familia de verdad.',
     url: 'http://www.fundacioncbh.cl',
     email: 'contacto@fundacioncbh.cl',
