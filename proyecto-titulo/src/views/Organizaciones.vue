@@ -124,7 +124,7 @@ const organizations = [
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
   .organizations {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
