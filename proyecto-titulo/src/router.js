@@ -22,11 +22,27 @@ const routes = [
     component: HistoriasVue
   },
   { path: '/:catchAll(.*)*', redirect: '/' },
-]
+];
 
 const router = createRouter({
   history: createWebHistory(),
   routes
-})
+});
+
+router.beforeEach((to, from, next) => {
+  // Show the loading component when navigating
+  document.querySelector('.loading').style.visibility = 'visible';
+  setTimeout(
+    () => {
+      next();
+    },
+    800
+  );
+});
+
+router.afterEach(() => {
+  // Hide the loading component when navigation is complete
+  document.querySelector('.loading').style.visibility = 'hidden';
+});
 
 export default router;
