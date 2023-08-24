@@ -1,66 +1,14 @@
 <script setup>
   import { ref } from 'vue';
+  import { 
+    types,
+    levels,
+    regions,
+    storeCase
+  } from '../utils/cases.js';
+
   const cities = ref([]);
   const communes = ref([]);
-
-  const types = [
-    {
-      title: 'Abandono',
-      value: 'abandono'
-    },
-    {
-      title: 'Maltrato',
-      value: 'maltrato'
-    },
-    {
-      title: 'Adopción',
-      value: 'adopcion'
-    },
-  ];
-
-  const regions = [
-    {
-      name: "Región Metropolitana",
-      cities: [
-        {
-          name: "Santiago",
-          communes: [
-            "Santiago",
-            "Providencia",
-            "Las Condes"
-          ]
-        },
-        {
-          name: "Maipú",
-          communes: [
-            "Maipú",
-            "Cerrillos",
-            "Pudahuel"
-          ]
-        }
-      ]
-    },
-    {
-      name: "Región de Valparaíso",
-      cities: [
-        {
-          name: "Valparaíso",
-          communes: [
-            "Valparaíso",
-            "Viña del Mar",
-            "Concón"
-          ]
-        },
-        {
-          name: "Quilpué",
-          communes: [
-            "Quilpué",
-            "Villa Alemana"
-          ]
-        }
-      ]
-    }
-  ];
 
   const handleRegionChange = (region) => {
     const regionSelected = regions.find(regionItem => regionItem.name === region);
@@ -74,21 +22,42 @@
     communes.value = citySelected ? citySelected.communes : [];
     document.getElementById('commune').value = '';
   };
+  
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const form = evt.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    const storedCase = storeCase(data);
+    console.log('Case stored successfully', storedCase);
+
+    document.location = '/';
+  };
 </script>
 
 <template>
   <div class="container mt-4 mb-4">
-    <form>
+    <form @submit="handleSubmit">
       <div class="row">
         <div class="col-12">
           <h1>Registrar Caso</h1>
         </div>
-        <div class="col-12 mt-2">
+        <div class="col-6 mt-2">
           <div class="form-group">
             <label for="type">Tipo de reporte</label>
             <select name="type" id="type" class="form-select">
               <option value='' selected hidden>Seleccione una opción..</option>
               <option v-for="typeItem of types" :value="typeItem.value">{{ typeItem.title }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-6 mt-2">
+          <div class="form-group">
+            <label for="level">Criticidad</label>
+            <select name="level" id="level" class="form-select">
+              <option value='' selected hidden>Seleccione una opción..</option>
+              <option v-for="level of levels" :value="level.value">{{ level.name }}</option>
             </select>
           </div>
         </div>
@@ -114,7 +83,7 @@
           <div class="form-group">
             <label for="commune">Comuna</label>
             <select name="commune" id="commune" class="form-select">
-              <option selected hidden>Seleccione una opción..</option>
+              <option value='' selected hidden>Seleccione una opción..</option>
               <option v-for="commune of communes" :value="commune">{{ commune }}</option>
             </select>
           </div>
