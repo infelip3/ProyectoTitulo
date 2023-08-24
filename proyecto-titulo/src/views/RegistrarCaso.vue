@@ -1,9 +1,9 @@
 <script setup>
   import { ref } from 'vue';
+  import { regions } from '../utils/locations.js';
   import { 
     types,
     levels,
-    regions,
     storeCase
   } from '../utils/cases.js';
 
@@ -27,9 +27,9 @@
     evt.preventDefault();
     const form = evt.target;
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+    const caseData = Object.fromEntries(formData.entries());
 
-    const storedCase = storeCase(data);
+    const storedCase = storeCase(caseData);
     console.log('Case stored successfully', storedCase);
 
     document.location = '/';
