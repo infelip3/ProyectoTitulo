@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 import InicioVue from './views/Inicio.vue';
 import QuienesSomosVue from './views/QuienesSomos.vue';
 import OrganizacionesVue from './views/Organizaciones.vue';
+import HistoriasVue from './views/Historias.vue';
+import RegistrarCasoVue from './views/RegistrarCaso.vue';
+import BuscarMascotaVue from './views/BuscarMascota.vue';
 
 const routes = [
   {
@@ -16,12 +19,40 @@ const routes = [
     path: '/organizaciones',
     component: OrganizacionesVue
   },
+  { 
+    path: '/historias',
+    component: HistoriasVue
+  },
+  { 
+    path: '/registrar-caso',
+    component: RegistrarCasoVue
+  },
+  { 
+    path: '/buscar',
+    component: BuscarMascotaVue
+  },
   { path: '/:catchAll(.*)*', redirect: '/' },
-]
+];
 
 const router = createRouter({
   history: createWebHistory(),
   routes
-})
+});
+
+router.beforeEach((to, from, next) => {
+  // Show the loading component when navigating
+  document.querySelector('.loading').style.visibility = 'visible';
+  setTimeout(
+    () => {
+      next();
+    },
+    800
+  );
+});
+
+router.afterEach(() => {
+  // Hide the loading component when navigation is complete
+  document.querySelector('.loading').style.visibility = 'hidden';
+});
 
 export default router;
