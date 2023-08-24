@@ -3,6 +3,7 @@ import InicioVue from './views/Inicio.vue';
 import QuienesSomosVue from './views/QuienesSomos.vue';
 import OrganizacionesVue from './views/Organizaciones.vue';
 import HistoriasVue from './views/Historias.vue';
+import RegistrarCasoVue from './views/RegistrarCaso.vue';
 
 const routes = [
   {
@@ -20,6 +21,10 @@ const routes = [
   { 
     path: '/historias',
     component: HistoriasVue
+  },
+  { 
+    path: '/registrar-caso',
+    component: RegistrarCasoVue
   },
   { path: '/:catchAll(.*)*', redirect: '/' },
 ];
