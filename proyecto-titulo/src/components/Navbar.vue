@@ -30,7 +30,7 @@
               <a class="nav-link" href="quienes-somos">Quienes Somos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="reportes">Generar Alertas</a>
+              <a class="nav-link" href="registrar-caso">Registrar Caso</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="reportes-plus">ReportesPLUS</a>

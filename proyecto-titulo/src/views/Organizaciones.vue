@@ -173,15 +173,19 @@ const organizations = [
 </script>
 
 <template>
-  <div class="organizations">
-    <div v-for="organization of organizations" class="item">
-      <img :src="`images/organizations/${organization.image}`" class="card-img-top" alt="">
-      <div class="content">
-        <h4>{{ organization.title }}</h4>
-        <p v-for="paragraph of organization.paragraphs">{{ paragraph }}</p>
-        <div class="btn-group" role="group">
-          <a :href="organization.url" target="_blank" class="btn btn-primary">Ir al sitio</a>
-          <a v-if="organization.email" :href="`mailto:${organization.email}`" target="_blank" class="btn btn-info">{{ organization.email }}</a>
+  <div class="container mt-4 mb-4">
+    <div class="row">
+      <div v-for="organization of organizations" class="col-4 mt-2 mb-2">
+        <div class="item">
+          <img :src="`images/organizations/${organization.image}`" class="card-img-top" alt="">
+          <div class="content">
+            <h4>{{ organization.title }}</h4>
+            <p v-for="paragraph of organization.paragraphs">{{ paragraph }}</p>
+            <div class="btn-group" role="group">
+              <a :href="organization.url" target="_blank" class="btn btn-primary">Ir al sitio</a>
+              <a v-if="organization.email" :href="`mailto:${organization.email}`" target="_blank" class="btn btn-info">{{ organization.email }}</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -189,28 +193,20 @@ const organizations = [
 </template>
 
 <style lang="scss" scoped>
-  .organizations {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1rem;
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 20px;
 
-    padding: 1rem;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
-    .item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-evenly;
-      gap: 20px;
-
-      padding: 2rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-      .content {
-        width: 100%;
-      }
+    .content {
+      width: 100%;
     }
   }
 </style>
