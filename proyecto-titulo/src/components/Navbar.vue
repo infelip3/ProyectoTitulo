@@ -18,7 +18,7 @@
               <a class="nav-link active" aria-current="page" href="/">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="buscadormascota">Busca tu mascota</a>
+              <a class="nav-link" href="buscar">Busca tu mascota</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="historias">Historias</a>

@@ -28,50 +28,6 @@ const levels = [
   },
 ];
 
-const regions = [
-  {
-    name: "Región Metropolitana",
-    cities: [
-      {
-        name: "Santiago",
-        communes: [
-          "Santiago",
-          "Providencia",
-          "Las Condes"
-        ]
-      },
-      {
-        name: "Maipú",
-        communes: [
-          "Maipú",
-          "Cerrillos",
-          "Pudahuel"
-        ]
-      }
-    ]
-  },
-  {
-    name: "Región de Valparaíso",
-    cities: [
-      {
-        name: "Valparaíso",
-        communes: [
-          "Valparaíso",
-          "Viña del Mar",
-          "Concón"
-        ]
-      },
-      {
-        name: "Quilpué",
-        communes: [
-          "Quilpué",
-          "Villa Alemana"
-        ]
-      }
-    ]
-  }
-];
-
 const storeCase = (caseData) => {
   const cases = getCases();
   
@@ -89,10 +45,14 @@ const getCases = () => {
   return localStorage.getItem('cases') ? JSON.parse(localStorage.getItem('cases')) : [];
 };
 
+const searchCases = (filters) => {
+  return getCases();
+};
+
 export {
   types,
   levels,
-  regions,
   storeCase,
   getCases,
+  searchCases,
 }

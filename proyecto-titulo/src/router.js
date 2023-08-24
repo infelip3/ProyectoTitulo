@@ -4,6 +4,7 @@ import QuienesSomosVue from './views/QuienesSomos.vue';
 import OrganizacionesVue from './views/Organizaciones.vue';
 import HistoriasVue from './views/Historias.vue';
 import RegistrarCasoVue from './views/RegistrarCaso.vue';
+import BuscarMascotaVue from './views/BuscarMascota.vue';
 
 const routes = [
   {
@@ -25,6 +26,10 @@ const routes = [
   { 
     path: '/registrar-caso',
     component: RegistrarCasoVue
+  },
+  { 
+    path: '/buscar',
+    component: BuscarMascotaVue
   },
   { path: '/:catchAll(.*)*', redirect: '/' },
 ];
