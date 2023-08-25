@@ -1,20 +1,27 @@
 <script setup>
-import { ref, onActivated } from 'vue';
-import { getLoggedUser } from '../utils/auth';
+import router from '../router';
+import { doLogout } from '../utils/auth'
 
-const loggedUser = ref(null);
+const props = defineProps(
+  {
+    loggedUser: {
+      type: Object,
+    }
+  }
+);
 
-onActivated(() => {
-  console.log('Activated Navbar');
-  getLoggedUser()
-    .then((user) => {
-      loggedUser.value = user;
+const handleLogoutClick = () => {
+  doLogout()
+    .then(() => {
+      router.go('/login');
     })
-    .catch((error) => {
-      loggedUser.value = null;
+    .catch(() => {
+      alert('Fail on logging out');
     });
-});
+};
+
 </script>
+
 <template>
   <div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -30,7 +37,7 @@ onActivated(() => {
         </button>
         <!-- Opciones menú -->
         <div class="collapse navbar-collapse  d-lg-flex justify-content-end" id="navbarNav">
-          <ul class="navbar-nav">
+          <ul v-if="props.loggedUser" class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Inicio</a>
             </li>
@@ -53,7 +60,7 @@ onActivated(() => {
               <a class="nav-link" href="reportes-plus">ReportesPLUS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="logout">Logout</a>
+              <a class="nav-link" href="#" @click="handleLogoutClick">Logout</a>
             </li>
           </ul>
         </div>

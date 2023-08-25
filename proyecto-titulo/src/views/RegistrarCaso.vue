@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import router from '../router';
 import { regions } from '../utils/locations.js';
 import { 
   types,
@@ -32,7 +33,7 @@ const handleSubmit = (evt) => {
   const storedCase = storeCase(caseData);
   console.log('Case stored successfully', storedCase);
 
-  document.location = '/';
+  router.push('/');
 };
 </script>
 
@@ -48,7 +49,7 @@ const handleSubmit = (evt) => {
             <label for="type">Tipo de reporte</label>
             <select name="type" id="type" class="form-select">
               <option value='' selected hidden>Seleccione una opción..</option>
-              <option v-for="typeItem of types" :value="typeItem.value">{{ typeItem.title }}</option>
+              <option v-for="(typeItem, index) of types" :value="typeItem.value" :key="`type-${index}`">{{ typeItem.title }}</option>
             </select>
           </div>
         </div>
@@ -57,7 +58,7 @@ const handleSubmit = (evt) => {
             <label for="level">Criticidad</label>
             <select name="level" id="level" class="form-select">
               <option value='' selected hidden>Seleccione una opción..</option>
-              <option v-for="level of levels" :value="level.value">{{ level.name }}</option>
+              <option v-for="(level, index) of levels" :value="level.value" :key="`level-${index}`">{{ level.name }}</option>
             </select>
           </div>
         </div>
@@ -66,7 +67,7 @@ const handleSubmit = (evt) => {
             <label for="region">Región</label>
             <select name="region" id="region" class="form-select" @change="(evt) => handleRegionChange(evt.target.value)">
               <option value='' selected hidden>Seleccione una opción..</option>
-              <option v-for="region of regions" :value="region.name">{{ region.name }}</option>
+              <option v-for="(region, index) of regions" :value="region.name" :key="`region-${index}`">{{ region.name }}</option>
             </select>
           </div>
         </div>
@@ -75,7 +76,7 @@ const handleSubmit = (evt) => {
             <label for="city">Ciudad</label>
             <select name="city" id="city" class="form-select" @change="(evt) => handleCityChange(evt.target.value)">
               <option value='' selected hidden>Seleccione una opción..</option>
-              <option v-for="city of cities" :value="city.name">{{ city.name }}</option>
+              <option v-for="(city, index) of cities" :value="city.name" :key="`city-${index}`">{{ city.name }}</option>
             </select>
           </div>
         </div>
@@ -84,7 +85,7 @@ const handleSubmit = (evt) => {
             <label for="commune">Comuna</label>
             <select name="commune" id="commune" class="form-select">
               <option value='' selected hidden>Seleccione una opción..</option>
-              <option v-for="commune of communes" :value="commune">{{ commune }}</option>
+              <option v-for="(commune, index) of communes" :value="commune" :key="`commune-${index}`">{{ commune }}</option>
             </select>
           </div>
         </div>

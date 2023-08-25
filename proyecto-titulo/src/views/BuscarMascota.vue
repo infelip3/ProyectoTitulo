@@ -1,86 +1,86 @@
 <script setup>
-  import { regions } from '../utils/locations.js';
-  import { searchCases } from '../utils/cases.js';
+import { regions } from '../utils/locations.js';
+import { searchCases } from '../utils/cases.js';
 
-  const types = [
-    {
-      name: 'Perro',
-      'value': 'dog'
-    },
-    {
-      name: 'Gato',
-      value: 'cat'
-    },
-    {
-      name: 'Conejo',
-      value: 'rabbit'
-    },
-    {
-      name: 'Cualquier tipo',
-      value: 'all'
-    }
-  ];
+const types = [
+  {
+    name: 'Perro',
+    'value': 'dog'
+  },
+  {
+    name: 'Gato',
+    value: 'cat'
+  },
+  {
+    name: 'Conejo',
+    value: 'rabbit'
+  },
+  {
+    name: 'Cualquier tipo',
+    value: 'all'
+  }
+];
 
-  const sizes = [
-    {
-      name: 'Pequeño',
-      value: 'small'
-    },
-    {
-      name: 'Mediano',
-      value: 'medium'
-    },
-    {
-      name: 'Grande',
-      value: 'large'
-    }
-  ];
+const sizes = [
+  {
+    name: 'Pequeño',
+    value: 'small'
+  },
+  {
+    name: 'Mediano',
+    value: 'medium'
+  },
+  {
+    name: 'Grande',
+    value: 'large'
+  }
+];
 
-  const genres = [
-    {
-      name: 'Macho',
-      value: 'macho'
-    },
-    {
-      name: 'Hembra',
-      value: 'hembra'
-    },
-    {
-      name: 'Cualquier género',
-      value: 'all'
-    }
-  ];
+const genres = [
+  {
+    name: 'Macho',
+    value: 'macho'
+  },
+  {
+    name: 'Hembra',
+    value: 'hembra'
+  },
+  {
+    name: 'Cualquier género',
+    value: 'all'
+  }
+];
 
-  const ages = [
-    {
-      name: 'Hasta 1 año',
-      value: 'upto1'
-    },
-    {
-      name: '1 a 5 años',
-      value: '1to5'
-    },
-    {
-      name: '6 a 10 años',
-      value: '6to10'
-    },
-    {
-      name: 'Cualquier edad',
-      value: 'all'
-    }
-  ];
-  
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    const form = evt.target;
-    const formData = new FormData(form);
-    const filtersData = Object.fromEntries(formData.entries());
+const ages = [
+  {
+    name: 'Hasta 1 año',
+    value: 'upto1'
+  },
+  {
+    name: '1 a 5 años',
+    value: '1to5'
+  },
+  {
+    name: '6 a 10 años',
+    value: '6to10'
+  },
+  {
+    name: 'Cualquier edad',
+    value: 'all'
+  }
+];
 
-    // TODO: Replace by real data
-    const foundCases = searchCases(filtersData);
+const handleSubmit = (evt) => {
+  evt.preventDefault();
+  const form = evt.target;
+  const formData = new FormData(form);
+  const filtersData = Object.fromEntries(formData.entries());
 
-    alert(`Se encontraron ${foundCases.length} casos!`);
-  };
+  // TODO: Replace by real data
+  const foundCases = searchCases(filtersData);
+
+  alert(`Se encontraron ${foundCases.length} casos!`);
+};
 </script>
 
 <template>

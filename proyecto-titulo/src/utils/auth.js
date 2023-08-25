@@ -19,30 +19,31 @@ const users = [
   },
 ];
 
+let loggedUser = null;
+
 const doLogin = (loginData) => new Promise((resolve, reject) => {
   const user = users.find((user) => user.email === loginData.email && user.password === loginData.password);
   if (user) {
     delete user.password;
     localStorage.setItem('loggedUser', JSON.stringify(user));
+    loggedUser = user;
+
     resolve(user);
   } else {
-    reject(new Error('Usuario o contraseña incorrectos'));
-  }
-});
+    loggedUser = null;
 
-const getLoggedUser = () => new Promise((resolve, reject) => {
-  const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
-  if (loggedUser) {
-    resolve(loggedUser);
-  } else {
-    reject(new Error('No hay un usuario logueado'));
+    reject(new Error('Usuario o contraseña incorrectos'));
   }
 });
 
 const doLogout = () => new Promise((resolve) => {
   localStorage.removeItem('loggedUser');
+  loggedUser = null;
+  
   resolve();
 });
+
+const getLoggedUser = () => localStorage.getItem('loggedUser') ? JSON.parse(localStorage.getItem('loggedUser')) : null;
 
 export {
   doLogin,

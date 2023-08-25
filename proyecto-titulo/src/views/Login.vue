@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { doLogin } from '../utils/auth';
+import router from '../router';
+import { doLogin, getLoggedUser } from '../utils/auth';
+
+const emit = defineEmits(['update-logged-user'])
 
 const loginResult = ref('');
 
@@ -16,15 +19,15 @@ const handleSubmit = (evt) => {
       password: loginData.password
     }
   )
-    .then((response) => {
-      console.log('Login successful', response);
-      loginResult.value = 'Login successful';
+    .then(() => {
+      router.push('/');
     })
-    .catch((error) => {
+    .catch(() => {
       loginResult.value = 'Error al iniciar sesión';
+    })
+    .finally(() => {
+      emit('update-logged-user', getLoggedUser());
     });
-
-  document.location = '/';
 };
 </script>
 
