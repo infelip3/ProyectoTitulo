@@ -1,39 +1,39 @@
 <script setup>
-  import { ref } from 'vue';
-  import { regions } from '../utils/locations.js';
-  import { 
-    types,
-    levels,
-    storeCase
-  } from '../utils/cases.js';
+import { ref } from 'vue';
+import { regions } from '../utils/locations.js';
+import { 
+  types,
+  levels,
+  storeCase
+} from '../utils/cases.js';
 
-  const cities = ref([]);
-  const communes = ref([]);
+const cities = ref([]);
+const communes = ref([]);
 
-  const handleRegionChange = (region) => {
-    const regionSelected = regions.find(regionItem => regionItem.name === region);
-    cities.value = regionSelected ? regionSelected.cities : [];
-    document.getElementById('city').value = '';
-    document.getElementById('commune').value = '';
-  };
-  
-  const handleCityChange = (city) => {
-    const citySelected = cities.value.find(cityItem => cityItem.name === city);
-    communes.value = citySelected ? citySelected.communes : [];
-    document.getElementById('commune').value = '';
-  };
-  
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    const form = evt.target;
-    const formData = new FormData(form);
-    const caseData = Object.fromEntries(formData.entries());
+const handleRegionChange = (region) => {
+  const regionSelected = regions.find(regionItem => regionItem.name === region);
+  cities.value = regionSelected ? regionSelected.cities : [];
+  document.getElementById('city').value = '';
+  document.getElementById('commune').value = '';
+};
 
-    const storedCase = storeCase(caseData);
-    console.log('Case stored successfully', storedCase);
+const handleCityChange = (city) => {
+  const citySelected = cities.value.find(cityItem => cityItem.name === city);
+  communes.value = citySelected ? citySelected.communes : [];
+  document.getElementById('commune').value = '';
+};
 
-    document.location = '/';
-  };
+const handleSubmit = (evt) => {
+  evt.preventDefault();
+  const form = evt.target;
+  const formData = new FormData(form);
+  const caseData = Object.fromEntries(formData.entries());
+
+  const storedCase = storeCase(caseData);
+  console.log('Case stored successfully', storedCase);
+
+  document.location = '/';
+};
 </script>
 
 <template>

@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { getLoggedUser, doLogout } from './utils/auth';
+import LoginVue from './views/Login.vue';
 import InicioVue from './views/Inicio.vue';
 import QuienesSomosVue from './views/QuienesSomos.vue';
 import OrganizacionesVue from './views/Organizaciones.vue';
@@ -10,6 +12,10 @@ const routes = [
   {
     path: '/',
     component: InicioVue
+  },
+  {
+    path: '/login',
+    component: LoginVue
   },
   { 
     path: '/quienes-somos',
@@ -40,14 +46,37 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // Show the loading component when navigating
-  document.querySelector('.loading').style.visibility = 'visible';
-  setTimeout(
-    () => {
-      next();
-    },
-    800
-  );
+  if(to.path === '/logout') {
+    doLogout()
+      .then(() => {
+        console.log('Logged out!');
+        router.to('/login');
+      })
+      .catch(() => {
+      });
+  }
+  else if(to.path !== '/login') {
+    getLoggedUser()
+      .then(() => {
+        setTimeout(
+          () => {
+            next();
+          },
+          800
+        );
+      })
+      .catch(() => {
+        router.to('/login');
+      })
+      .finally(() => {
+        // Show the loading component when navigating
+        document.querySelector('.loading').style.visibility = 'visible';
+      });
+  }
+  else
+  {
+    next();
+  }
 });
 
 router.afterEach(() => {

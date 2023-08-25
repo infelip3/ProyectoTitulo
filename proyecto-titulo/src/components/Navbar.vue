@@ -1,3 +1,20 @@
+<script setup>
+import { ref, onActivated } from 'vue';
+import { getLoggedUser } from '../utils/auth';
+
+const loggedUser = ref(null);
+
+onActivated(() => {
+  console.log('Activated Navbar');
+  getLoggedUser()
+    .then((user) => {
+      loggedUser.value = user;
+    })
+    .catch((error) => {
+      loggedUser.value = null;
+    });
+});
+</script>
 <template>
   <div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -36,7 +53,7 @@
               <a class="nav-link" href="reportes-plus">ReportesPLUS</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login">Login</a>
+              <a class="nav-link" href="logout">Logout</a>
             </li>
           </ul>
         </div>
