@@ -28,6 +28,78 @@ const levels = [
   },
 ];
 
+const species = [
+  {
+    name: 'Perro',
+    'value': 'dog'
+  },
+  {
+    name: 'Gato',
+    value: 'cat'
+  },
+  {
+    name: 'Conejo',
+    value: 'rabbit'
+  },
+  {
+    name: 'Cualquier tipo',
+    value: 'any'
+  }
+];
+
+const sizes = [
+  {
+    name: 'Pequeño',
+    value: 'small'
+  },
+  {
+    name: 'Mediano',
+    value: 'medium'
+  },
+  {
+    name: 'Grande',
+    value: 'large'
+  },
+  {
+    name: 'Cualquier tamaño',
+    value: 'any'
+  }
+];
+
+const genres = [
+  {
+    name: 'Macho',
+    value: 'macho'
+  },
+  {
+    name: 'Hembra',
+    value: 'hembra'
+  },
+  {
+    name: 'Cualquier género',
+    value: 'any'
+  }
+];
+
+const ages = [
+  {
+    name: 'Hasta 1 año',
+    value: 'upto1'
+  },
+  {
+    name: '1 a 5 años',
+    value: '1to5'
+  },
+  {
+    name: '6 a 10 años',
+    value: '6to10'
+  },
+  {
+    name: 'Cualquier edad',
+    value: 'any'
+  }
+];
+
 const storeCase = (caseData) => new Promise(async (resolve, reject) => {
 
   const SUCCESS = true;
@@ -51,6 +123,7 @@ const storeCase = (caseData) => new Promise(async (resolve, reject) => {
       errors: {
         type: ['El tipo es requerido'],
         level: ['El nivel es requerido'],
+        size: ['El tamaño es requerido'],
         email: ['El correo es requerido'],
       }
     };
@@ -69,11 +142,15 @@ const searchCases = (filters) => new Promise((resolve) => {
   {
     const cases = localStorage.getItem('cases') ? JSON.parse(localStorage.getItem('cases')) : [];
     const filteredCases = cases.filter((caseItem) => {
-      const { region } = filters;
+      const { region, specie, size, genre, age } = filters;
 
-      const regionMatched = region === 'all' ? true : caseItem.region === region;
+      const regionMatched = region === 'any' ? true : caseItem.region === region;
+      const specieMatched = specie === 'any' ? true : caseItem.specie === specie;
+      const sizeMatched = size === 'any' ? true : caseItem.size === size;
+      const genreMatched = genre === 'any' ? true : caseItem.genre === genre;
+      const ageMatched = age === 'any' ? true : caseItem.age === age;
 
-      return regionMatched;
+      return regionMatched && specieMatched && sizeMatched && genreMatched && ageMatched;
     });
 
     resolve(filteredCases);
@@ -87,6 +164,10 @@ const searchCases = (filters) => new Promise((resolve) => {
 export {
   types,
   levels,
+  species,
+  sizes,
+  genres,
+  ages,
   storeCase,
   getCases,
   searchCases,

@@ -5,6 +5,10 @@ import { regions } from '../utils/locations.js';
 import { 
   types,
   levels,
+  species,
+  sizes,
+  genres,
+  ages,
   storeCase
 } from '../utils/cases.js';
 
@@ -90,6 +94,10 @@ onMounted(async () => {
   await sleepTimeout(100);
   document.getElementById('type').value = types[0].value;
   document.getElementById('level').value = levels[0].value;
+  document.getElementById('specie').value = species[0].value;
+  document.getElementById('size').value = sizes[0].value;
+  document.getElementById('genre').value = genres[0].value;
+  document.getElementById('age').value = ages[0].value;
   const selectRegion = document.getElementById('region');
   selectRegion.value = regions[0].name;
   handleRegionChange(selectRegion.value);
@@ -154,6 +162,42 @@ onMounted(async () => {
             <select name="commune" id="commune" class="form-select" required>
               <option value='' selected hidden>Seleccione una opción..</option>
               <option v-for="(commune, index) of communes" :value="commune" :key="`commune-${index}`">{{ commune }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-6 mt-2">
+          <div class="form-group">
+            <label for="type">Especie</label>
+            <select name="specie" id="specie" class="form-select" required>
+              <option value='' selected hidden>Seleccione una opción..</option>
+              <option v-for="specie of species" :value="specie.value">{{ specie.name }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-6 mt-2">
+          <div class="form-group">
+            <label for="size">Tamaño</label>
+            <select name="size" id="size" class="form-select" required>
+              <option value='' selected hidden>Seleccione una opción..</option>
+              <option v-for="size of sizes" :value="size.value">{{ size.name }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-6 mt-2">
+          <div class="form-group">
+            <label for="genre">Género</label>
+            <select name="genre" id="genre" class="form-select" required>
+              <option value='' selected hidden>Seleccione una opción..</option>
+              <option v-for="genre of genres" :value="genre.value">{{ genre.name }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-6 mt-2">
+          <div class="form-group">
+            <label for="age">Edad</label>
+            <select name="age" id="age" class="form-select" required>
+              <option value='' selected hidden>Seleccione una opción..</option>
+              <option v-for="age of ages" :value="age.value">{{ age.name }}</option>
             </select>
           </div>
         </div>
