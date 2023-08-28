@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import router from '../router';
 import { regions } from '../utils/locations.js';
 import { 
@@ -24,17 +24,85 @@ const handleCityChange = (city) => {
   document.getElementById('commune').value = '';
 };
 
+const validateForm = (form, errors) => {
+  form.classList.remove('was-validated');
+
+  // Clear existing error messages
+  const errorFields = form.querySelectorAll('.form-control.is-invalid');
+  errorFields.forEach((field) => {
+    field.classList.remove('is-invalid');
+    field.classList.remove('is-valid');
+  });
+
+  form.querySelectorAll('.form-control,.form-select').forEach((field) => {
+    field.addEventListener('change', () => {
+      field.classList.remove('is-invalid');
+      field.classList.remove('is-valid');
+    });
+
+    if(Object.keys(errors).includes(field.name))
+    {
+      field.classList.add('is-invalid');
+    }
+    else
+    {
+      field.classList.add('is-valid');
+    }
+  });
+
+  // Display errors
+  for (const field in errors) {
+    const fieldElement = form.querySelector(`[name="${field}"]`);
+    if (fieldElement) {
+      fieldElement.classList.add('is-invalid');
+    }
+  }
+}
+
 const handleSubmit = (evt) => {
   evt.preventDefault();
   const form = evt.target;
+
   const formData = new FormData(form);
   const caseData = Object.fromEntries(formData.entries());
 
-  const storedCase = storeCase(caseData);
-  console.log('Case stored successfully', storedCase);
-
-  router.push('/');
+  storeCase(caseData)
+    .then(() => {
+      router.push('/');
+    })
+    .catch((errorResponse) => {
+      validateForm(form, errorResponse.errors);
+    });
 };
+
+// TODO: Remove. For testing purposes
+onMounted(async () => {
+  const sleepTimeout = async (ms) => new Promise(
+    (resolve) => setTimeout(resolve, ms)
+  );
+
+  // Set required fields
+  document.querySelectorAll('form [required]').forEach((requiredField) => {
+    requiredField.previousElementSibling.classList.add('required');
+  });
+
+  // Auto-load form
+  await sleepTimeout(100);
+  document.getElementById('type').value = types[0].value;
+  document.getElementById('level').value = levels[0].value;
+  const selectRegion = document.getElementById('region');
+  selectRegion.value = regions[0].name;
+  handleRegionChange(selectRegion.value);
+  const selectCity = document.getElementById('city');
+  await sleepTimeout(100);
+  selectCity.value = regions[0].cities[0].name;
+  handleCityChange(selectCity.value);
+  const selectCommune = document.getElementById('commune');
+  await sleepTimeout(100);
+  selectCommune.value = regions[0].cities[0].communes[0];
+  document.getElementById('email').value = 'some@email.com';
+  document.getElementById('description').value = 'This is some case description';
+});
 </script>
 
 <template>
@@ -47,7 +115,7 @@ const handleSubmit = (evt) => {
         <div class="col-6 mt-2">
           <div class="form-group">
             <label for="type">Tipo de reporte</label>
-            <select name="type" id="type" class="form-select">
+            <select name="type" id="type" class="form-select" required>
               <option value='' selected hidden>Seleccione una opción..</option>
               <option v-for="(typeItem, index) of types" :value="typeItem.value" :key="`type-${index}`">{{ typeItem.title }}</option>
             </select>
@@ -56,7 +124,7 @@ const handleSubmit = (evt) => {
         <div class="col-6 mt-2">
           <div class="form-group">
             <label for="level">Criticidad</label>
-            <select name="level" id="level" class="form-select">
+            <select name="level" id="level" class="form-select" required>
               <option value='' selected hidden>Seleccione una opción..</option>
               <option v-for="(level, index) of levels" :value="level.value" :key="`level-${index}`">{{ level.name }}</option>
             </select>
@@ -65,7 +133,7 @@ const handleSubmit = (evt) => {
         <div class="col-6 mt-2">
           <div class="form-group">
             <label for="region">Región</label>
-            <select name="region" id="region" class="form-select" @change="(evt) => handleRegionChange(evt.target.value)">
+            <select name="region" id="region" class="form-select" @change="(evt) => handleRegionChange(evt.target.value)" required>
               <option value='' selected hidden>Seleccione una opción..</option>
               <option v-for="(region, index) of regions" :value="region.name" :key="`region-${index}`">{{ region.name }}</option>
             </select>
@@ -74,7 +142,7 @@ const handleSubmit = (evt) => {
         <div class="col-6 mt-2">
           <div class="form-group">
             <label for="city">Ciudad</label>
-            <select name="city" id="city" class="form-select" @change="(evt) => handleCityChange(evt.target.value)">
+            <select name="city" id="city" class="form-select" @change="(evt) => handleCityChange(evt.target.value)" required>
               <option value='' selected hidden>Seleccione una opción..</option>
               <option v-for="(city, index) of cities" :value="city.name" :key="`city-${index}`">{{ city.name }}</option>
             </select>
@@ -83,7 +151,7 @@ const handleSubmit = (evt) => {
         <div class="col-6 mt-2">
           <div class="form-group">
             <label for="commune">Comuna</label>
-            <select name="commune" id="commune" class="form-select">
+            <select name="commune" id="commune" class="form-select" required>
               <option value='' selected hidden>Seleccione una opción..</option>
               <option v-for="(commune, index) of communes" :value="commune" :key="`commune-${index}`">{{ commune }}</option>
             </select>
@@ -92,13 +160,13 @@ const handleSubmit = (evt) => {
         <div class="col-6 mt-2">
           <div class="form-group">
             <label for="email">Ingrese su correo</label>
-            <input type="email" class="form-control" id="email" name="email">
+            <input type="email" class="form-control" id="email" name="email" required>
           </div>
         </div>
         <div class="col-12 mt-2">
           <div class="form-group">
             <label for="description">Describa el evento en pocas palabras</label>
-            <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+            <textarea class="form-control" name="description" id="description" rows="5" required></textarea>
           </div>
         </div>
         <div class="col-12 mt-2">
@@ -113,12 +181,14 @@ const handleSubmit = (evt) => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .form-group {
   label {
-    &:after {
-      content: ' *';
-      color: red;
+    &.required {
+      &:after {
+        content: ' *';
+        color: red;
+      }
     }
   }
 }

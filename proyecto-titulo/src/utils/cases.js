@@ -28,26 +28,61 @@ const levels = [
   },
 ];
 
-const storeCase = (caseData) => {
-  const cases = getCases();
+const storeCase = (caseData) => new Promise(async (resolve, reject) => {
+
+  const SUCCESS = true;
+
+  if(SUCCESS)
+  {
+    const cases = await getCases();
   
-  const newCase = {
-    ...caseData,
-    date: new Date().toISOString(),  
-  };
+    const newCase = {
+      ...caseData,
+      date: new Date().toISOString(),  
+    };
+  
+    localStorage.setItem('cases', JSON.stringify([...cases, newCase]));
+  
+    resolve(newCase);
+  }
+  else
+  {
+    const responseErrors = {
+      errors: {
+        type: ['El tipo es requerido'],
+        level: ['El nivel es requerido'],
+        email: ['El correo es requerido'],
+      }
+    };
+  
+    reject(responseErrors);
+  }
+});
 
-  localStorage.setItem('cases', JSON.stringify([...cases, newCase]));
+const getCases = () => new Promise((resolve) => {
+  const cases = localStorage.getItem('cases') ? JSON.parse(localStorage.getItem('cases')) : [];
+  resolve(cases);
+});
 
-  return newCase;
-};
+const searchCases = (filters) => new Promise((resolve) => {
+  try
+  {
+    const cases = localStorage.getItem('cases') ? JSON.parse(localStorage.getItem('cases')) : [];
+    const filteredCases = cases.filter((caseItem) => {
+      const { region } = filters;
 
-const getCases = () => {
-  return localStorage.getItem('cases') ? JSON.parse(localStorage.getItem('cases')) : [];
-};
+      const regionMatched = region === 'all' ? true : caseItem.region === region;
 
-const searchCases = (filters) => {
-  return getCases();
-};
+      return regionMatched;
+    });
+
+    resolve(filteredCases);
+  }
+  catch(error)
+  {
+    reject(error);
+  }
+});
 
 export {
   types,

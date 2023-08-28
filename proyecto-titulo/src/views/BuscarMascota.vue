@@ -33,6 +33,10 @@ const sizes = [
   {
     name: 'Grande',
     value: 'large'
+  },
+  {
+    name: 'Cualquier tamaño',
+    value: 'all'
   }
 ];
 
@@ -70,14 +74,13 @@ const ages = [
   }
 ];
 
-const handleSubmit = (evt) => {
+const handleSubmit = async (evt) => {
   evt.preventDefault();
   const form = evt.target;
   const formData = new FormData(form);
   const filtersData = Object.fromEntries(formData.entries());
 
-  // TODO: Replace by real data
-  const foundCases = searchCases(filtersData);
+  const foundCases = await searchCases(filtersData);
 
   alert(`Se encontraron ${foundCases.length} casos!`);
 };
@@ -93,9 +96,10 @@ const handleSubmit = (evt) => {
         <div class="col-6 mt-2">
           <div class="form-group">
             <label for="region">Región</label>
-            <select name="region" id="region" class="form-select" @change="(evt) => handleRegionChange(evt.target.value)">
+            <select name="region" id="region" class="form-select">
               <option value='' selected hidden>Seleccione una opción..</option>
               <option v-for="region of regions" :value="region.name">{{ region.name }}</option>
+              <option value="all">Cualquier región</option>
             </select>
           </div>
         </div>
