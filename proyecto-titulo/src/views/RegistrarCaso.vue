@@ -14,6 +14,7 @@ import {
 
 const cities = ref([]);
 const communes = ref([]);
+const base64Image = ref('');
 
 const handleRegionChange = (region) => {
   const regionSelected = regions.find(regionItem => regionItem.name === region);
@@ -63,12 +64,26 @@ const validateForm = (form, errors) => {
   }
 }
 
+const handleImageChange = (event) => {
+  const selectedFile = event.target.files[0];
+
+  if (selectedFile) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      base64Image.value = reader.result;
+      console.log(base64Image);
+    };
+    reader.readAsDataURL(selectedFile);
+  }
+}
+
 const handleSubmit = (evt) => {
   evt.preventDefault();
   const form = evt.target;
 
   const formData = new FormData(form);
   const caseData = Object.fromEntries(formData.entries());
+  caseData.image = base64Image.value ?? null;
 
   storeCase(caseData)
     .then(() => {
@@ -216,7 +231,7 @@ onMounted(async () => {
         <div class="col-12 mt-2">
           <div class="form-group">
             <label for="attachments">Adjuntar archivo</label>
-            <input type="file" class="form-control" id="attachments" name="attachments">
+            <input type="file" class="form-control" id="attachments" name="attachments" @change="handleImageChange">
           </div>
         </div>
       </div>
