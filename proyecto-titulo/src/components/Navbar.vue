@@ -57,7 +57,7 @@ const handleLogoutClick = () => {
               <a class="nav-link" href="registrar-caso">Registrar Caso</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="reportes-plus">ReportesPLUS</a>
+              <a class="nav-link" href="reporte-plus">ReportesPLUS</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" @click="handleLogoutClick">Logout</a>

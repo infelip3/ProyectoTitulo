@@ -21,12 +21,12 @@ const levels = [
     value: 'bajo'
   },
   {
-    name: 'Alto',
-    value: 'alto'
-  },
-  {
     name: 'Medio',
     value: 'medio'
+  },
+  {
+    name: 'Alto',
+    value: 'alto'
   },
 ];
 
@@ -149,6 +149,38 @@ const searchCases = (filters) => new Promise((resolve) => {
   }
 });
 
+const generatePlusReport = (filters) => new Promise((resolve) => {
+  try
+  {
+    const cases = localStorage.getItem('cases') ? JSON.parse(localStorage.getItem('cases')) : [];
+    const filteredCases = cases.filter((caseItem) => {
+      const { 
+        type,
+        level,
+        region,
+        city,
+        commune,
+        specie,
+      } = filters;
+
+      const typeMatched = type === 'any' ? true : caseItem.type === type;
+      const levelMatched = level === 'any' ? true : caseItem.level === level;
+      const regionMatched = region === 'any' ? true : caseItem.region === region;
+      const cityMatched = city === 'any' ? true : caseItem.city === city;
+      const communeMatched = commune === 'any' ? true : caseItem.commune === commune;
+      const specieMatched = specie === 'any' ? true : caseItem.specie === specie;
+
+      return typeMatched && levelMatched && regionMatched && cityMatched && communeMatched && specieMatched;
+    });
+
+    resolve(filteredCases);
+  }
+  catch(error)
+  {
+    reject(error);
+  }
+});
+
 export {
   types,
   levels,
@@ -159,4 +191,5 @@ export {
   storeCase,
   getCases,
   searchCases,
+  generatePlusReport,
 }
