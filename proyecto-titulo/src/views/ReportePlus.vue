@@ -158,7 +158,6 @@ onMounted(async () => {
       </tbody>
     </table>
   </div>
-  <button @click="printToPDF('output.pdf')">TEST</button>
 </template>
 
 <style lang="scss" scoped>
