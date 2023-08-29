@@ -28,12 +28,7 @@ const handleSubmit = async (evt) => {
   }
 };
 
-// TODO: Remove. For testing purposes
 onMounted(async () => {
-  const sleepTimeout = async (ms) => new Promise(
-    (resolve) => setTimeout(resolve, ms)
-  );
-
   // Set required fields
   document.querySelectorAll('form [required]').forEach((requiredField) => {
     requiredField.previousElementSibling.classList.add('required');
