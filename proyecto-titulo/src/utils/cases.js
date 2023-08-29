@@ -1,3 +1,5 @@
+import { getLoggedUser } from './auth';
+
 const types = [
   {
     title: 'Abandono',
@@ -40,10 +42,6 @@ const species = [
   {
     name: 'Conejo',
     value: 'rabbit'
-  },
-  {
-    name: 'Cualquier tipo',
-    value: 'any'
   }
 ];
 
@@ -59,10 +57,6 @@ const sizes = [
   {
     name: 'Grande',
     value: 'large'
-  },
-  {
-    name: 'Cualquier tamaño',
-    value: 'any'
   }
 ];
 
@@ -74,10 +68,6 @@ const genres = [
   {
     name: 'Hembra',
     value: 'hembra'
-  },
-  {
-    name: 'Cualquier género',
-    value: 'any'
   }
 ];
 
@@ -93,15 +83,12 @@ const ages = [
   {
     name: '6 a 10 años',
     value: '6to10'
-  },
-  {
-    name: 'Cualquier edad',
-    value: 'any'
   }
 ];
 
 const storeCase = (caseData) => new Promise(async (resolve, reject) => {
 
+  const loggedUser = getLoggedUser();
   const SUCCESS = true;
 
   if(SUCCESS)
@@ -110,6 +97,7 @@ const storeCase = (caseData) => new Promise(async (resolve, reject) => {
   
     const newCase = {
       ...caseData,
+      reporterEmail: loggedUser.email,
       date: new Date().toISOString(),  
     };
   

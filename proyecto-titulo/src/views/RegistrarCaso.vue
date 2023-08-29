@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import router from '../router';
+import Swal from 'sweetalert2';
 import { regions } from '../utils/locations.js';
 import { 
   types,
@@ -87,7 +88,15 @@ const handleSubmit = (evt) => {
 
   storeCase(caseData)
     .then(() => {
-      router.push('/');
+      Swal.fire({
+        title: 'Caso registrado',
+        text: 'Su caso ha sido registrado exitosamente',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      })
+        .then(() => {
+          router.push('/');
+        });
     })
     .catch((errorResponse) => {
       validateForm(form, errorResponse.errors);
