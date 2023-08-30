@@ -37,7 +37,7 @@ const handleLogoutClick = () => {
         </button>
         <!-- Opciones menú -->
         <div class="collapse navbar-collapse  d-lg-flex justify-content-end" id="navbarNav">
-          <ul v-if="props.loggedUser" class="navbar-nav">
+          <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Inicio</a>
             </li>
@@ -59,8 +59,11 @@ const handleLogoutClick = () => {
             <li class="nav-item">
               <a class="nav-link" href="reporte-plus">ReportesPLUS</a>
             </li>
-            <li class="nav-item">
+            <li v-if="props.loggedUser" class="nav-item">
               <a class="nav-link" href="#" @click="handleLogoutClick">Logout</a>
+            </li>
+            <li v-else class="nav-item">
+              <a class="nav-link" href="login">Login</a>
             </li>
           </ul>
         </div>

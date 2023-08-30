@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { getLoggedUser } from './utils/auth';
 import LoginVue from './views/Login.vue';
+import ForbiddenVue from './views/Forbidden.vue';
 import InicioVue from './views/Inicio.vue';
 import QuienesSomosVue from './views/QuienesSomos.vue';
 import OrganizacionesVue from './views/Organizaciones.vue';
@@ -8,6 +9,32 @@ import HistoriasVue from './views/Historias.vue';
 import RegistrarCasoVue from './views/RegistrarCaso.vue';
 import BuscarMascotaVue from './views/BuscarMascota.vue';
 import ReportePlusVue from './views/ReportePlus.vue';
+
+const roles = [
+  {
+    name: 'Administrador',
+    value: 'admin',
+    allowedRoutes: [
+      '/quienes-somos',
+      '/organizaciones',
+      '/historias',
+      '/registrar-caso',
+      '/buscar',
+      '/reporte-plus'
+    ],
+  },
+  {
+    name: 'Usuario',
+    value: 'user',
+    allowedRoutes: [
+      '/quienes-somos',
+      '/organizaciones',
+      '/historias',
+      '/registrar-caso',
+      '/buscar',
+    ],
+  }
+];
 
 const routes = [
   {
@@ -18,29 +45,39 @@ const routes = [
     path: '/login',
     component: LoginVue
   },
+  {
+    path: '/forbidden',
+    component: ForbiddenVue
+  },
   { 
     path: '/quienes-somos',
-    component: QuienesSomosVue
+    component: QuienesSomosVue,
+    requiredAuth: false,
   },
   { 
     path: '/organizaciones',
-    component: OrganizacionesVue
+    component: OrganizacionesVue,
+    requiredAuth: false,
   },
   { 
     path: '/historias',
-    component: HistoriasVue
+    component: HistoriasVue,
+    requiredAuth: false,
   },
   { 
     path: '/registrar-caso',
-    component: RegistrarCasoVue
+    component: RegistrarCasoVue,
+    requiredAuth: true,
   },
   { 
     path: '/buscar',
-    component: BuscarMascotaVue
+    component: BuscarMascotaVue,
+    requiredAuth: true,
   },
   { 
     path: '/reporte-plus',
-    component: ReportePlusVue
+    component: ReportePlusVue,
+    requiredAuth: true,
   },
   { path: '/:catchAll(.*)*', redirect: '/' },
 ];
@@ -52,34 +89,54 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
 
-  const loggedUser = getLoggedUser();
-
   // Show the loading component when navigating
   document.querySelector('.loading').style.visibility = 'visible';
 
   setTimeout(
     () => {
-      if(loggedUser === null)
+
+      const route = routes.find((route) => route.path === to.fullPath);
+      if(route)
       {
-        if(to.fullPath === '/login')
+        if(route.requiredAuth === true)
         {
-          next();
+          const loggedUser = getLoggedUser();
+          if(loggedUser === null)
+          {
+            if(to.fullPath === '/login')
+            {
+              next();
+            }
+            else if(to.fullPath === '/forbidden')
+            {
+              next();
+            }
+            else
+            {
+              next('/login');
+            }
+          }
+          else
+          {
+            const role = roles.find((role) => role.value === loggedUser.role);
+            if(role.allowedRoutes.includes(to.fullPath))
+            {
+              next();
+            }
+            else
+            {
+              next('/forbidden');
+            }
+          }
         }
         else
         {
-          next('/login');
+          next();
         }
       }
       else
       {
-        if(to.fullPath === '/login')
-        {
-          next('/');
-        }
-        else
-        {
-          next();
-        }
+        next('/');
       }
     },
     200
