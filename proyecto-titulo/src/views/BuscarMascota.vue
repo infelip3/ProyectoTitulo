@@ -97,7 +97,7 @@ onMounted(async () => {
       <div v-for="(result, index) in searchResults" :key="index" class="col-4 mt-2 mb-2">
         <div class="item">
           <img v-if="result.image" :src="result.image ?? `images/search/no-image.jpg`" class="card-img-top" alt="">
-          <img v-else src="images/search/no-image.jpg" class="card-img-top" alt="">
+          <img v-else src="images/search/no-image.jpg" class="card-img-top rounded" alt="">
           <div class="content">
             <h4>{{ result.region }}</h4>
             <p>{{ result.description }}</p>
