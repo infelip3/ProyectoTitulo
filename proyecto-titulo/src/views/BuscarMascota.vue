@@ -1,86 +1,39 @@
 <script setup>
-  import { regions } from '../utils/locations.js';
-  import { searchCases } from '../utils/cases.js';
+import { ref, onMounted } from 'vue';
+import { regions } from '../utils/locations.js';
+import {
+  species,
+  sizes,
+  genres,
+  ages, 
+  searchCases
+} from '../utils/cases.js';
 
-  const types = [
-    {
-      name: 'Perro',
-      'value': 'dog'
-    },
-    {
-      name: 'Gato',
-      value: 'cat'
-    },
-    {
-      name: 'Conejo',
-      value: 'rabbit'
-    },
-    {
-      name: 'Cualquier tipo',
-      value: 'all'
-    }
-  ];
+const searchResults = ref([]);
 
-  const sizes = [
-    {
-      name: 'Pequeño',
-      value: 'small'
-    },
-    {
-      name: 'Mediano',
-      value: 'medium'
-    },
-    {
-      name: 'Grande',
-      value: 'large'
-    }
-  ];
+const handleSubmit = async (evt) => {
+  evt.preventDefault();
+  const form = evt.target;
+  const formData = new FormData(form);
+  const filtersData = Object.fromEntries(formData.entries());
 
-  const genres = [
-    {
-      name: 'Macho',
-      value: 'macho'
-    },
-    {
-      name: 'Hembra',
-      value: 'hembra'
-    },
-    {
-      name: 'Cualquier género',
-      value: 'all'
-    }
-  ];
+  try
+  {
+    const foundCases = await searchCases(filtersData);
+    searchResults.value = foundCases;
+  }
+  catch(error)
+  {
+    searchResults.value = [];
+  }
+};
 
-  const ages = [
-    {
-      name: 'Hasta 1 año',
-      value: 'upto1'
-    },
-    {
-      name: '1 a 5 años',
-      value: '1to5'
-    },
-    {
-      name: '6 a 10 años',
-      value: '6to10'
-    },
-    {
-      name: 'Cualquier edad',
-      value: 'all'
-    }
-  ];
-  
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    const form = evt.target;
-    const formData = new FormData(form);
-    const filtersData = Object.fromEntries(formData.entries());
-
-    // TODO: Replace by real data
-    const foundCases = searchCases(filtersData);
-
-    alert(`Se encontraron ${foundCases.length} casos!`);
-  };
+onMounted(async () => {
+  // Set required fields
+  document.querySelectorAll('form [required]').forEach((requiredField) => {
+    requiredField.previousElementSibling.classList.add('required');
+  });
+});
 </script>
 
 <template>
@@ -93,18 +46,18 @@
         <div class="col-6 mt-2">
           <div class="form-group">
             <label for="region">Región</label>
-            <select name="region" id="region" class="form-select" @change="(evt) => handleRegionChange(evt.target.value)">
-              <option value='' selected hidden>Seleccione una opción..</option>
+            <select name="region" id="region" class="form-select">
+              <option value="any" selected>Cualquier región</option>
               <option v-for="region of regions" :value="region.name">{{ region.name }}</option>
             </select>
           </div>
         </div>
         <div class="col-6 mt-2">
           <div class="form-group">
-            <label for="type">Tipo</label>
-            <select name="type" id="type" class="form-select">
-              <option value='' selected hidden>Seleccione una opción..</option>
-              <option v-for="typeItem of types" :value="typeItem.name">{{ typeItem.name }}</option>
+            <label for="type">Especie</label>
+            <select name="specie" id="specie" class="form-select">
+              <option value="any" selected>Cualquier especie</option>
+              <option v-for="specie of species" :value="specie.value">{{ specie.name }}</option>
             </select>
           </div>
         </div>
@@ -112,8 +65,8 @@
           <div class="form-group">
             <label for="size">Tamaño</label>
             <select name="size" id="size" class="form-select">
-              <option value='' selected hidden>Seleccione una opción..</option>
-              <option v-for="size of sizes" :value="size.name">{{ size.name }}</option>
+              <option value="any" selected>Cualquier tamaño</option>
+              <option v-for="size of sizes" :value="size.value">{{ size.name }}</option>
             </select>
           </div>
         </div>
@@ -121,8 +74,8 @@
           <div class="form-group">
             <label for="genre">Género</label>
             <select name="genre" id="genre" class="form-select">
-              <option value='' selected hidden>Seleccione una opción..</option>
-              <option v-for="genre of genres" :value="genre.name">{{ genre.name }}</option>
+              <option value="any" selected>Cualquier género</option>
+              <option v-for="genre of genres" :value="genre.value">{{ genre.name }}</option>
             </select>
           </div>
         </div>
@@ -130,14 +83,32 @@
           <div class="form-group">
             <label for="age">Edad</label>
             <select name="age" id="age" class="form-select">
-              <option value='' selected hidden>Seleccione una opción..</option>
-              <option v-for="age of ages" :value="age.name">{{ age.name }}</option>
+              <option value="any" selected>Cualquier edad</option>
+              <option v-for="age of ages" :value="age.value">{{ age.name }}</option>
             </select>
           </div>
         </div>
       </div>
       <button type="submit" class="btn btn-primary mt-3">Buscar</button>
     </form>
+  </div>
+  <div class="container mt-4 mb-4">
+    <div v-if="searchResults.length > 0" class="row">
+      <div v-for="(result, index) in searchResults" :key="index" class="col-4 mt-2 mb-2">
+        <div class="item">
+          <img v-if="result.image" :src="result.image ?? `images/search/no-image.jpg`" class="card-img-top" alt="">
+          <img v-else src="images/search/no-image.jpg" class="card-img-top rounded" alt="">
+          <div class="content">
+            <h4>{{ result.region }}</h4>
+            <p>{{ result.description }}</p>
+            <a class="btn btn-primary" :href="`mailto:${result.reporterEmail}`">Contactar a {{ result.reporterEmail }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 v-else>
+      <span>No se encontraron resultados</span>
+    </h3>
   </div>
 </template>
 
@@ -148,6 +119,22 @@
       content: ' *';
       color: red;
     }
+  }
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  .content {
+    width: 100%;
   }
 }
 </style>

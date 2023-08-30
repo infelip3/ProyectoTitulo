@@ -1,3 +1,27 @@
+<script setup>
+import router from '../router';
+import { doLogout } from '../utils/auth'
+
+const props = defineProps(
+  {
+    loggedUser: {
+      type: Object,
+    }
+  }
+);
+
+const handleLogoutClick = () => {
+  doLogout()
+    .then(() => {
+      router.go('/login');
+    })
+    .catch(() => {
+      alert('Fail on logging out');
+    });
+};
+
+</script>
+
 <template>
   <div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -33,9 +57,12 @@
               <a class="nav-link" href="registrar-caso">Registrar Caso</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="reportes-plus">ReportesPLUS</a>
+              <a class="nav-link" href="reporte-plus">ReportesPLUS</a>
             </li>
-            <li class="nav-item">
+            <li v-if="props.loggedUser" class="nav-item">
+              <a class="nav-link" href="#" @click="handleLogoutClick">Logout</a>
+            </li>
+            <li v-else class="nav-item">
               <a class="nav-link" href="login">Login</a>
             </li>
           </ul>
