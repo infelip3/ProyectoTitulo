@@ -88,13 +88,13 @@ const ages = [
 
 const storeCase = (caseData) => new Promise(async (resolve, reject) => {
 
-  const loggedUser = getLoggedUser();
   const SUCCESS = true;
 
   if(SUCCESS)
   {
     const cases = await getCases();
   
+    const loggedUser = getLoggedUser();
     const newCase = {
       ...caseData,
       reporterEmail: loggedUser.email,

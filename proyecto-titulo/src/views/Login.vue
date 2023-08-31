@@ -1,9 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import router from '../router';
-import { doLogin, getLoggedUser } from '../utils/auth';
-
-const emit = defineEmits(['update-logged-user'])
+import { signInUser } from '../utils/auth';
 
 const loginResult = ref('');
 
@@ -13,7 +11,7 @@ const handleSubmit = (evt) => {
   const formData = new FormData(form);
   const loginData = Object.fromEntries(formData.entries());
 
-  doLogin(
+  signInUser(
     {
       email: loginData.email,
       password: loginData.password
@@ -24,9 +22,6 @@ const handleSubmit = (evt) => {
     })
     .catch(() => {
       loginResult.value = 'Error al iniciar sesión';
-    })
-    .finally(() => {
-      emit('update-logged-user', getLoggedUser());
     });
 };
 </script>
@@ -41,13 +36,13 @@ const handleSubmit = (evt) => {
         <div class="offset-4 col-4 mt-2">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email">
+            <input type="email" class="form-control" name="email" value="admin@mail.com">
           </div>
         </div>
         <div class="offset-4 col-4 mt-2">
           <div class="form-group">
             <label for="password">Contraseña</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control" name="password" value="admin1">
             <span>{{ loginResult }}</span>
           </div>
         </div>

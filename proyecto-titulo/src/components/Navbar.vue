@@ -1,24 +1,5 @@
 <script setup>
-import router from '../router';
-import { doLogout } from '../utils/auth'
-
-const props = defineProps(
-  {
-    loggedUser: {
-      type: Object,
-    }
-  }
-);
-
-const handleLogoutClick = () => {
-  doLogout()
-    .then(() => {
-      router.go('/login');
-    })
-    .catch(() => {
-      alert('Fail on logging out');
-    });
-};
+import { getLoggedUser } from '../utils/auth';
 
 </script>
 
@@ -39,31 +20,31 @@ const handleLogoutClick = () => {
         <div class="collapse navbar-collapse  d-lg-flex justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+              <router-link class="nav-link active" aria-current="page" to="/">Inicio</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="buscar">Busca tu mascota</a>
+              <router-link class="nav-link" key="buscar" to="buscar">Busca tu mascota</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="historias">Historias</a>
+              <router-link class="nav-link" key="historias" to="historias">Historias</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="organizaciones">Organizaciones</a>
+              <router-link class="nav-link" key="organizaciones" to="organizaciones">Organizaciones</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="quienes-somos">Quienes Somos</a>
+              <router-link class="nav-link" key="quienes" to="quienes-somos">Quienes Somos</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="registrar-caso">Registrar Caso</a>
+              <router-link class="nav-link" key="registrar" to="registrar-caso">Registrar Caso</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="reporte-plus">ReportesPLUS</a>
+              <router-link class="nav-link" key="reporte" to="reporte-plus">ReportesPLUS</router-link>
             </li>
-            <li v-if="props.loggedUser" class="nav-item">
-              <a class="nav-link" href="#" @click="handleLogoutClick">Logout</a>
+            <li v-if="getLoggedUser()" class="nav-item">
+              <router-link class="nav-link" key="logout" to="logout">Logout</router-link>
             </li>
             <li v-else class="nav-item">
-              <a class="nav-link" href="login">Login</a>
+              <router-link class="nav-link" key="login" to="login">Login</router-link>
             </li>
           </ul>
         </div>

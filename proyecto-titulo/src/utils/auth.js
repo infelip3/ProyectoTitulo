@@ -1,55 +1,28 @@
-const users = [
-  {
-    id: 1,
-    name: 'Administrador',
-    email: 'admin@mail.com',
-    password: 'admin',
-    role: 'admin'
-  },
-  {
-    id: 2,
-    name: 'UsuarioPlus',
-    email: 'plus@mail.com',
-    password: 'plus',
-    role: 'admin'
-  },
-  {
-    id: 3,
-    name: 'Usuario',
-    email: 'user@mail.com',
-    password: 'user',
-    role: 'user'
-  },
-];
+import { ref } from 'vue';
+import { authClient } from './firebase';
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js";
 
-let loggedUser = null;
+const loggedUser = ref(null);
 
-const doLogin = (loginData) => new Promise((resolve, reject) => {
-  const user = users.find((user) => user.email === loginData.email && user.password === loginData.password);
-  if (user) {
-    delete user.password;
-    localStorage.setItem('loggedUser', JSON.stringify(user));
-    loggedUser = user;
-
-    resolve(user);
-  } else {
-    loggedUser = null;
-
-    reject(new Error('Usuario o contraseña incorrectos'));
-  }
+onAuthStateChanged(authClient, (user) => {
+  loggedUser.value = user
+    ? {
+      id: user.uid,
+      email: user.email
+    }
+    : null;
 });
 
-const doLogout = () => new Promise((resolve) => {
-  localStorage.removeItem('loggedUser');
-  loggedUser = null;
-  
-  resolve();
-});
+const signInUser = (loginData) => signInWithEmailAndPassword(authClient, loginData.email, loginData.password);
 
-const getLoggedUser = () => localStorage.getItem('loggedUser') ? JSON.parse(localStorage.getItem('loggedUser')) : null;
+const signOutUser = () => signOut(authClient);
+
+const getLoggedUser = () => {
+  return loggedUser.value;
+}
 
 export {
-  doLogin,
   getLoggedUser,
-  doLogout,
-}
+  signInUser,
+  signOutUser,
+};
