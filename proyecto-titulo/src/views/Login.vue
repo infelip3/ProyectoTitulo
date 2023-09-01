@@ -42,7 +42,7 @@ const handleSubmit = (evt) => {
         <div class="offset-4 col-4 mt-2">
           <div class="form-group">
             <label for="password">Contraseña</label>
-            <input type="password" class="form-control" name="password" value="admin1">
+            <input type="password" class="form-control" name="password" value="furryadmin1">
             <span>{{ loginResult }}</span>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { getLoggedUser, signOutUser } from '../utils/auth';
-import { getRoles } from '../utils/roles';
+import { getRoleByName, getRoles } from '../utils/roles';
 import LoginVue from '../views/Login.vue';
 import ForbiddenVue from '../views/Forbidden.vue';
 import InicioVue from '../views/Inicio.vue';
@@ -10,32 +10,6 @@ import HistoriasVue from '../views/Historias.vue';
 import RegistrarCasoVue from '../views/RegistrarCaso.vue';
 import BuscarMascotaVue from '../views/BuscarMascota.vue';
 import ReportePlusVue from '../views/ReportePlus.vue';
-
-// const roles = [
-//   {
-//     name: 'Administrador',
-//     value: 'admin',
-//     allowedRoutes: [
-//       '/quienes-somos',
-//       '/organizaciones',
-//       '/historias',
-//       '/registrar-caso',
-//       '/buscar',
-//       '/reporte-plus',
-//     ],
-//   },
-//   {
-//     name: 'Usuario',
-//     value: 'user',
-//     allowedRoutes: [
-//       '/quienes-somos',
-//       '/organizaciones',
-//       '/historias',
-//       '/registrar-caso',
-//       '/buscar',
-//     ],
-//   },
-// ];
 
 const routes = [
   {
@@ -104,16 +78,13 @@ router.beforeEach(async (to, from, next) => {
     if (route) {
       if (route.requiredAuth === true) {
         if (loggedUser === null) {
-          if (to.fullPath === '/login') {
-            next();
-          } else if (to.fullPath === '/forbidden') {
+          if (to.fullPath === '/login' || to.fullPath === '/forbidden') {
             next();
           } else {
             next('/login');
           }
         } else {
-          const roles = await getRoles();
-          const role = roles.find((roleItem) => roleItem.value === loggedUser.role);
+          const role = await getRoleByName(loggedUser.role);
           if (role && role.allowedRoutes.includes(to.fullPath)) {
             next();
           } else {

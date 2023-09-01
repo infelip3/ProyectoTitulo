@@ -20,6 +20,26 @@ const getCollectionData = (collectionName) => new Promise(
   }
 );
 
+const getSubCollectionData = (collectionName, collectionId, subCollectionName) => new Promise(
+  async (resolve, reject) => {
+    try
+    {
+      const querySnapshot = await getDocs(collection(firestoreClient, collectionName, collectionId, subCollectionName));
+      const subCollectionData = [];
+      querySnapshot.forEach((doc) => {
+        subCollectionData.push({ id: doc.id, ...doc.data() });
+      });
+      
+      resolve(subCollectionData);
+    }
+    catch (error)
+    {
+      reject(error);
+    }
+  }
+);
+
 export {
-  getCollectionData
+  getCollectionData,
+  getSubCollectionData,
 };

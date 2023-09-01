@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import router from '../router';
 import Swal from 'sweetalert2';
-import { regions } from '../utils/locations.js';
+import { getRegions } from '../utils/locations.js';
 import { 
   types,
   levels,
@@ -13,6 +13,7 @@ import {
   storeCase
 } from '../utils/cases.js';
 
+const regions = ref([]);
 const cities = ref([]);
 const communes = ref([]);
 const base64Image = ref('');
@@ -114,6 +115,8 @@ onMounted(async () => {
     requiredField.previousElementSibling.classList.add('required');
   });
 
+  regions.value = await getRegions();
+  
   // Auto-load form
   await sleepTimeout(100);
   document.getElementById('type').value = types[0].value;

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { regions } from '../utils/locations.js';
+import { getRegions } from '../utils/locations.js';
 import {
   types,
   levels,
@@ -8,12 +8,15 @@ import {
   generatePlusReport,
 } from '../utils/cases.js';
 
+const regions = ref([]);
 const cities = ref([]);
 const communes = ref([]);
 const searchResults = ref([]);
 
 const handleRegionChange = (region) => {
-  const regionSelected = regions.find(regionItem => regionItem.name === region);
+  console.log(region, regions.value);
+  const regionSelected = regions.value.find(regionItem => regionItem.name === region);
+  console.log(regionSelected)
   cities.value = regionSelected ? regionSelected.cities : [];
   document.getElementById('city').value = '';
   document.getElementById('commune').value = '';
@@ -62,6 +65,8 @@ onMounted(async () => {
   document.querySelectorAll('form [required]').forEach((requiredField) => {
     requiredField.previousElementSibling.classList.add('required');
   });
+
+  regions.value = await getRegions();
 });
 </script>
 

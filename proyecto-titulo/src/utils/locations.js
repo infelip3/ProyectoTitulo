@@ -1,47 +1,11 @@
-const regions = [
-  {
-    name: "Región Metropolitana",
-    cities: [
-      {
-        name: "Santiago",
-        communes: [
-          "Santiago",
-          "Providencia",
-          "Las Condes"
-        ]
-      },
-      {
-        name: "Maipú",
-        communes: [
-          "Maipú",
-          "Cerrillos",
-          "Pudahuel"
-        ]
-      }
-    ]
-  },
-  {
-    name: "Región de Valparaíso",
-    cities: [
-      {
-        name: "Valparaíso",
-        communes: [
-          "Valparaíso",
-          "Viña del Mar",
-          "Concón"
-        ]
-      },
-      {
-        name: "Quilpué",
-        communes: [
-          "Quilpué",
-          "Villa Alemana"
-        ]
-      }
-    ]
-  }
-];
+import { getCollectionData, getSubCollectionData } from "./firestore"
+import { getFirestore, addDoc, collection, getDocs, onSnapshot, deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
+
+const getRegions = async () => getCollectionData('regions');
+
+const getCities = (regionId) => getSubCollectionData('regions', regionId, 'cities');
 
 export {
-  regions,
+  getRegions,
+  getCities,
 }

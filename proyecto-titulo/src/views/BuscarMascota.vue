@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { regions } from '../utils/locations.js';
+import { getRegions } from '../utils/locations.js';
 import {
   species,
   sizes,
@@ -9,6 +9,7 @@ import {
   searchCases
 } from '../utils/cases.js';
 
+const regions = ref([]);
 const searchResults = ref([]);
 
 const handleSubmit = async (evt) => {
@@ -33,6 +34,8 @@ onMounted(async () => {
   document.querySelectorAll('form [required]').forEach((requiredField) => {
     requiredField.previousElementSibling.classList.add('required');
   });
+
+  regions.value = await getRegions();
 });
 </script>
 
