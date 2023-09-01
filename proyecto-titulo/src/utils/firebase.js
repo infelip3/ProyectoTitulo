@@ -4,7 +4,7 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-auth
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 // Auth
 const authClient = getAuth();

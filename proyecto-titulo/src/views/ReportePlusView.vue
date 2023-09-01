@@ -74,7 +74,7 @@ onMounted(async () => {
             <label for="type">Tipo</label>
             <select name="type" id="type" class="form-select">
               <option value="any" selected>Cualquier tipo</option>
-              <option v-for="typeItem of types" :value="typeItem.id">{{ typeItem.title }}</option>
+              <option v-for="(typeItem, index) of types" :key="`type-${index}`" :value="typeItem.id">{{ typeItem.title }}</option>
             </select>
           </div>
         </div>
@@ -92,7 +92,7 @@ onMounted(async () => {
             <label for="region">Región</label>
             <select name="region" id="region" class="form-select" @change="(evt) => handleRegionChange(evt.target.value)">
               <option value="any" selected>Cualquier región</option>
-              <option v-for="region of regions" :value="region.id">{{ region.name }}</option>
+              <option v-for="(region, index) of regions" :key="`region-${index}`" :value="region.id">{{ region.name }}</option>
             </select>
           </div>
         </div>
@@ -119,7 +119,7 @@ onMounted(async () => {
             <label for="type">Especie</label>
             <select name="specie" id="specie" class="form-select">
               <option value="any" selected>Cualquier especie</option>
-              <option v-for="specie of species" :value="specie.id">{{ specie.name }}</option>
+              <option v-for="(specie, index) of species" :key="`specie-${index}`" :value="specie.id">{{ specie.name }}</option>
             </select>
           </div>
         </div>
@@ -145,7 +145,7 @@ onMounted(async () => {
         </tr>
       </thead>
       <tbody v-if="searchResults.length > 0">
-        <tr v-for="(result, index) of searchResults">
+        <tr v-for="(result, index) of searchResults" :key="`result-${index}`">
           <th scope="row">{{ index + 1 }}</th>
           <td>{{ result.type.title }}</td>
           <td>{{ result.level.name }}</td>

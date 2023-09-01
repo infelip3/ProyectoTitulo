@@ -175,12 +175,12 @@ const organizations = [
 <template>
   <div class="container mt-4 mb-4">
     <div class="row">
-      <div v-for="organization of organizations" class="col-4 mt-2 mb-2">
+      <div v-for="(organization, organizationIndex) of organizations" :key="`organization-${organizationIndex}`" class="col-4 mt-2 mb-2">
         <div class="item">
           <img :src="`images/organizations/${organization.image}`" class="card-img-top" alt="">
           <div class="content">
             <h4>{{ organization.title }}</h4>
-            <p v-for="paragraph of organization.paragraphs">{{ paragraph }}</p>
+            <p v-for="(paragraph, index) of organization.paragraphs" :key="`organization-${organizationIndex}-paragraph-${index}`">{{ paragraph }}</p>
             <div class="btn-group" role="group">
               <a :href="organization.url" target="_blank" class="btn btn-primary">Ir al sitio</a>
               <a v-if="organization.email" :href="`mailto:${organization.email}`" target="_blank" class="btn btn-info">{{ organization.email }}</a>

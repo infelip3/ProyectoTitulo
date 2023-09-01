@@ -65,7 +65,7 @@ onMounted(async () => {
             <label for="region">Región</label>
             <select name="region" id="region" class="form-select">
               <option value="any" selected>Cualquier región</option>
-              <option v-for="region of regions" :value="region.id">{{ region.name }}</option>
+              <option v-for="(region, index) of regions" :key="`region-${index}`" :value="region.id">{{ region.name }}</option>
             </select>
           </div>
         </div>
@@ -74,7 +74,7 @@ onMounted(async () => {
             <label for="type">Especie</label>
             <select name="specie" id="specie" class="form-select">
               <option value="any" selected>Cualquier especie</option>
-              <option v-for="specie of species" :value="specie.id">{{ specie.name }}</option>
+              <option v-for="(specie, index) of species" :key="`specie-${index}`" :value="specie.id">{{ specie.name }}</option>
             </select>
           </div>
         </div>
@@ -83,7 +83,7 @@ onMounted(async () => {
             <label for="size">Tamaño</label>
             <select name="size" id="size" class="form-select">
               <option value="any" selected>Cualquier tamaño</option>
-              <option v-for="size of sizes" :value="size.id">{{ size.name }}</option>
+              <option v-for="(size, index) of sizes" :key="`size-${index}`"  :value="size.id">{{ size.name }}</option>
             </select>
           </div>
         </div>
@@ -92,7 +92,7 @@ onMounted(async () => {
             <label for="genre">Género</label>
             <select name="genre" id="genre" class="form-select">
               <option value="any" selected>Cualquier género</option>
-              <option v-for="genre of genres" :value="genre.id">{{ genre.name }}</option>
+              <option v-for="(genre, index) of genres" :key="`genre-${index}`" :value="genre.id">{{ genre.name }}</option>
             </select>
           </div>
         </div>
@@ -101,7 +101,7 @@ onMounted(async () => {
             <label for="age">Edad</label>
             <select name="age" id="age" class="form-select">
               <option value="any" selected>Cualquier edad</option>
-              <option v-for="age of ages" :value="age.id">{{ age.name }}</option>
+              <option v-for="(age, index) of ages" :key="`age-${index}`" :value="age.id">{{ age.name }}</option>
             </select>
           </div>
         </div>

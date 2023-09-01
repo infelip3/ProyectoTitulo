@@ -1,12 +1,12 @@
 <script setup>
-import Loading from './components/Loading.vue';
-import Navbar from './components/Navbar.vue';
+import VLoading from './components/VLoading.vue';
+import VNavbar from './components/VNavbar.vue';
 </script>
 
 <template>
   <div>
-    <Loading />
-    <Navbar/>
+    <VLoading />
+    <VNavbar/>
     <router-view />
   </div>
 </template>

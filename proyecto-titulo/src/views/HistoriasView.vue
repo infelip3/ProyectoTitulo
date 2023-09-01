@@ -76,7 +76,7 @@ const showStory = (story) => {
   </div>
   <div class="container mt-4 mb-4">
     <div class="row">
-      <div v-for="story of stories" class="col-4 mt-2 mb-2">
+      <div v-for="(story, index) of stories" :key="`story-${index}`" class="col-4 mt-2 mb-2">
         <div class="item">
           <img :src="`images/stories/${story.image}`" class="card-img-top rounded" alt="">
           <div class="content">

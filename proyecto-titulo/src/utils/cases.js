@@ -116,7 +116,7 @@ const getAges = () => new Promise(
   }
 );
 
-const storeCase = (caseData) => new Promise(async (resolve, reject) => {
+const storeCase = async (caseData) => {
 
   const responseErrors = {};
   if(!caseData.type)
@@ -162,7 +162,7 @@ const storeCase = (caseData) => new Promise(async (resolve, reject) => {
 
   if(Object.keys(responseErrors).length > 0)
   {
-    reject(responseErrors);
+    throw new Error(responseErrors);
   }
   else
   {
@@ -173,117 +173,92 @@ const storeCase = (caseData) => new Promise(async (resolve, reject) => {
       date: new Date().toISOString(),  
     };
 
-    addDocumentToCollection('cases', newCase)
-      .then(
-        (docRef) => resolve(docRef),
-      )
-      .catch(
-        (error) => reject(error),
-      );
+    return addDocumentToCollection('cases', newCase);
   }
-});
+};
 
 const getCases = () => getCollectionData('cases');
 
-const searchCases = (filters) => new Promise(
-  async (resolve, reject) => {
-    try
-    {
-      await forceLoad(regions, loadLocalRegions);
-      await forceLoad(types, getTypes);
-      await forceLoad(levels, getLevels);
-      await forceLoad(species, getSpecies);
-      await forceLoad(sizes, getSizes);
-      await forceLoad(genres, getGenres);
-      await forceLoad(ages, getAges);
+const searchCases = async (filters) => {
+  await forceLoad(regions, loadLocalRegions);
+  await forceLoad(types, getTypes);
+  await forceLoad(levels, getLevels);
+  await forceLoad(species, getSpecies);
+  await forceLoad(sizes, getSizes);
+  await forceLoad(genres, getGenres);
+  await forceLoad(ages, getAges);
 
-      console.clear();
-      const cases = await getCases();
-      const filteredCases = cases
-        .filter((caseItem) => {
-          const { region, specie, size, genre, age } = filters;
+  console.clear();
+  const cases = await getCases();
+  const filteredCases = cases
+    .filter((caseItem) => {
+      const { region, specie, size, genre, age } = filters;
 
-          const regionMatched = region === 'any' ? true : caseItem.region === region;
-          const specieMatched = specie === 'any' ? true : caseItem.specie === specie;
-          const sizeMatched = size === 'any' ? true : caseItem.size === size;
-          const genreMatched = genre === 'any' ? true : caseItem.genre === genre;
-          const ageMatched = age === 'any' ? true : caseItem.age === age;
+      const regionMatched = region === 'any' ? true : caseItem.region === region;
+      const specieMatched = specie === 'any' ? true : caseItem.specie === specie;
+      const sizeMatched = size === 'any' ? true : caseItem.size === size;
+      const genreMatched = genre === 'any' ? true : caseItem.genre === genre;
+      const ageMatched = age === 'any' ? true : caseItem.age === age;
 
-          return regionMatched && specieMatched && sizeMatched && genreMatched && ageMatched;
-        })
-        .map((caseItem) => {
+      return regionMatched && specieMatched && sizeMatched && genreMatched && ageMatched;
+    })
+    .map((caseItem) => {
 
-          caseItem.region = regions.value.find((regionItem) => regionItem.id === caseItem.region);
-          caseItem.type = types.value.find((typeItem) => typeItem.id === caseItem.type);
-          caseItem.level = levels.value.find((levelItem) => levelItem.id === caseItem.level);
-          caseItem.specie = species.value.find((specieItem) => specieItem.id === caseItem.specie);
-          caseItem.size = sizes.value.find((sizeItem) => sizeItem.id === caseItem.size);
-          caseItem.genre = genres.value.find((genreItem) => genreItem.id === caseItem.genre);
-          caseItem.age = ages.value.find((ageItem) => ageItem.id === caseItem.age);
-          caseItem.city = caseItem.region.cities.find((cityItem) => cityItem.id === caseItem.city);
+      caseItem.region = regions.value.find((regionItem) => regionItem.id === caseItem.region);
+      caseItem.type = types.value.find((typeItem) => typeItem.id === caseItem.type);
+      caseItem.level = levels.value.find((levelItem) => levelItem.id === caseItem.level);
+      caseItem.specie = species.value.find((specieItem) => specieItem.id === caseItem.specie);
+      caseItem.size = sizes.value.find((sizeItem) => sizeItem.id === caseItem.size);
+      caseItem.genre = genres.value.find((genreItem) => genreItem.id === caseItem.genre);
+      caseItem.age = ages.value.find((ageItem) => ageItem.id === caseItem.age);
+      caseItem.city = caseItem.region.cities.find((cityItem) => cityItem.id === caseItem.city);
 
-          return caseItem;
-        });
+      return caseItem;
+    });
 
-      resolve(filteredCases);
-    }
-    catch(error)
-    {
-      reject(error);
-    }
-  }
-);
+  return filteredCases;
+};
 
-const generatePlusReport = (filters) => new Promise(
-  async (resolve, reject) => {
-    try
-    {
-      await forceLoad(types, getTypes);
-      await forceLoad(levels, getLevels);
-      await forceLoad(species, getSpecies);
-      await forceLoad(sizes, getSizes);
-      await forceLoad(genres, getGenres);
-      await forceLoad(ages, getAges);
-      await forceLoad(regions, loadLocalRegions);
+const generatePlusReport = async (filters) => {
+  await forceLoad(types, getTypes);
+  await forceLoad(levels, getLevels);
+  await forceLoad(species, getSpecies);
+  await forceLoad(sizes, getSizes);
+  await forceLoad(genres, getGenres);
+  await forceLoad(ages, getAges);
+  await forceLoad(regions, loadLocalRegions);
 
-      console.clear();
-      const cases = await getCases();
-      const filteredCases = cases
-        .filter((caseItem) => {
-          const { type, level, region, city, commune, specie } = filters;
+  console.clear();
+  const cases = await getCases();
+  const filteredCases = cases
+    .filter((caseItem) => {
+      const { type, level, region, city, commune, specie } = filters;
 
-          const typeMatched = type === 'any' ? true : caseItem.type === type;
-          const levelMatched = level === 'any' ? true : caseItem.level === level;
-          const regionMatched = region === 'any' ? true : caseItem.region === region;
-          const cityMatched = city === 'any' ? true : caseItem.city === city;
-          const communeMatched = commune === 'any' ? true : caseItem.commune === commune;
-          const specieMatched = specie === 'any' ? true : caseItem.specie === specie;
+      const typeMatched = type === 'any' ? true : caseItem.type === type;
+      const levelMatched = level === 'any' ? true : caseItem.level === level;
+      const regionMatched = region === 'any' ? true : caseItem.region === region;
+      const cityMatched = city === 'any' ? true : caseItem.city === city;
+      const communeMatched = commune === 'any' ? true : caseItem.commune === commune;
+      const specieMatched = specie === 'any' ? true : caseItem.specie === specie;
 
-          return typeMatched && levelMatched && regionMatched && cityMatched && communeMatched && specieMatched;
-        })
-        .map((caseItem) => {
+      return typeMatched && levelMatched && regionMatched && cityMatched && communeMatched && specieMatched;
+    })
+    .map((caseItem) => {
 
-          caseItem.type = types.value.find((typeItem) => typeItem.id === caseItem.type);
-          caseItem.level = levels.value.find((levelItem) => levelItem.id === caseItem.level);
-          caseItem.specie = species.value.find((specieItem) => specieItem.id === caseItem.specie);
-          caseItem.size = sizes.value.find((sizeItem) => sizeItem.id === caseItem.size);
-          caseItem.genre = genres.value.find((genreItem) => genreItem.id === caseItem.genre);
-          caseItem.age = ages.value.find((ageItem) => ageItem.id === caseItem.age);
-          caseItem.region = regions.value.find((regionItem) => regionItem.id === caseItem.region);
-          caseItem.city = caseItem.region.cities.find((cityItem) => cityItem.id === caseItem.city);
+      caseItem.type = types.value.find((typeItem) => typeItem.id === caseItem.type);
+      caseItem.level = levels.value.find((levelItem) => levelItem.id === caseItem.level);
+      caseItem.specie = species.value.find((specieItem) => specieItem.id === caseItem.specie);
+      caseItem.size = sizes.value.find((sizeItem) => sizeItem.id === caseItem.size);
+      caseItem.genre = genres.value.find((genreItem) => genreItem.id === caseItem.genre);
+      caseItem.age = ages.value.find((ageItem) => ageItem.id === caseItem.age);
+      caseItem.region = regions.value.find((regionItem) => regionItem.id === caseItem.region);
+      caseItem.city = caseItem.region.cities.find((cityItem) => cityItem.id === caseItem.city);
 
-          return caseItem;
-        });
-      
-      console.log('filteredCases', filteredCases);
-      resolve(filteredCases);
-    }
-    catch(error)
-    {
-      reject(error);
-    }
-  }
-);
+      return caseItem;
+    });
+  
+  return filteredCases;
+};
 
 export {
   getLevels,
