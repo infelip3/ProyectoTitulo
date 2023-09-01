@@ -14,7 +14,7 @@ const species = ref([]);
 const regions = ref([]);
 const cities = ref([]);
 const communes = ref([]);
-const searchResults = ref([]);
+const searchResults = ref(null);
 const isLoading = ref(false);
 
 const handleRegionChange = async (regionId) => {
@@ -130,7 +130,7 @@ onMounted(async () => {
       </button>
     </form>
   </div>
-  <div id="report-container" class="container mt-4 mb-4">
+  <div v-if="searchResults !== null" class="container mt-4 mb-4">
     <table class="table table-hover">
       <thead>
         <tr>
@@ -144,7 +144,7 @@ onMounted(async () => {
           <th scope="col">Fecha</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="searchResults.length > 0">
         <tr v-for="(result, index) of searchResults">
           <th scope="row">{{ index + 1 }}</th>
           <td>{{ result.type.title }}</td>
@@ -154,6 +154,11 @@ onMounted(async () => {
           <td>{{ result.commune }}</td>
           <td>{{ result.specie.name }}</td>
           <td>{{ new Date(result.date).toDateString() }}</td>
+        </tr>
+      </tbody>
+      <tbody v-else>
+        <tr>
+          <td colspan="8" class="text-center">No se encontraron resultados</td>
         </tr>
       </tbody>
     </table>

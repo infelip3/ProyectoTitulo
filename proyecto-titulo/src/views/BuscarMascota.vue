@@ -14,7 +14,7 @@ const sizes = ref([]);
 const genres = ref([]);
 const ages = ref([]);
 const regions = ref([]);
-const searchResults = ref([]);
+const searchResults = ref(null);
 const isLoading = ref(false);
 
 const handleSubmit = async (evt) => {
@@ -112,7 +112,7 @@ onMounted(async () => {
       </button>
     </form>
   </div>
-  <div class="container mt-4 mb-4">
+  <div v-if="searchResults !== null" class="container mt-4 mb-4">
     <div v-if="searchResults.length > 0" class="row">
       <div v-for="(result, index) in searchResults" :key="index" class="col-4 mt-2 mb-2">
         <div class="item">
