@@ -1,14 +1,19 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { regions } from '../utils/locations.js';
+import { getRegions } from '../utils/locations.js';
 import {
-  species,
-  sizes,
-  genres,
-  ages, 
+  getSpecies,
+  getSizes,
+  getGenres,
+  getAges, 
   searchCases
 } from '../utils/cases.js';
 
+const species = ref([]);
+const sizes = ref([]);
+const genres = ref([]);
+const ages = ref([]);
+const regions = ref([]);
 const searchResults = ref([]);
 
 const handleSubmit = async (evt) => {
@@ -33,6 +38,12 @@ onMounted(async () => {
   document.querySelectorAll('form [required]').forEach((requiredField) => {
     requiredField.previousElementSibling.classList.add('required');
   });
+
+  species.value = await getSpecies();
+  sizes.value = await getSizes();
+  genres.value = await getGenres();
+  ages.value = await getAges();
+  regions.value = await getRegions();
 });
 </script>
 
@@ -48,7 +59,7 @@ onMounted(async () => {
             <label for="region">Región</label>
             <select name="region" id="region" class="form-select">
               <option value="any" selected>Cualquier región</option>
-              <option v-for="region of regions" :value="region.name">{{ region.name }}</option>
+              <option v-for="region of regions" :value="region.id">{{ region.name }}</option>
             </select>
           </div>
         </div>
@@ -57,7 +68,7 @@ onMounted(async () => {
             <label for="type">Especie</label>
             <select name="specie" id="specie" class="form-select">
               <option value="any" selected>Cualquier especie</option>
-              <option v-for="specie of species" :value="specie.value">{{ specie.name }}</option>
+              <option v-for="specie of species" :value="specie.id">{{ specie.name }}</option>
             </select>
           </div>
         </div>
@@ -66,7 +77,7 @@ onMounted(async () => {
             <label for="size">Tamaño</label>
             <select name="size" id="size" class="form-select">
               <option value="any" selected>Cualquier tamaño</option>
-              <option v-for="size of sizes" :value="size.value">{{ size.name }}</option>
+              <option v-for="size of sizes" :value="size.id">{{ size.name }}</option>
             </select>
           </div>
         </div>
@@ -75,7 +86,7 @@ onMounted(async () => {
             <label for="genre">Género</label>
             <select name="genre" id="genre" class="form-select">
               <option value="any" selected>Cualquier género</option>
-              <option v-for="genre of genres" :value="genre.value">{{ genre.name }}</option>
+              <option v-for="genre of genres" :value="genre.id">{{ genre.name }}</option>
             </select>
           </div>
         </div>
@@ -84,7 +95,7 @@ onMounted(async () => {
             <label for="age">Edad</label>
             <select name="age" id="age" class="form-select">
               <option value="any" selected>Cualquier edad</option>
-              <option v-for="age of ages" :value="age.value">{{ age.name }}</option>
+              <option v-for="age of ages" :value="age.id">{{ age.name }}</option>
             </select>
           </div>
         </div>
@@ -99,7 +110,7 @@ onMounted(async () => {
           <img v-if="result.image" :src="result.image ?? `images/search/no-image.jpg`" class="card-img-top" alt="">
           <img v-else src="images/search/no-image.jpg" class="card-img-top rounded" alt="">
           <div class="content">
-            <h4>{{ result.region }}</h4>
+            <h4>{{ result.region.name }}</h4>
             <p>{{ result.description }}</p>
             <a class="btn btn-primary" :href="`mailto:${result.reporterEmail}`">Contactar a {{ result.reporterEmail }}</a>
           </div>

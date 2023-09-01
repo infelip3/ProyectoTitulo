@@ -1,28 +1,29 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { regions } from '../utils/locations.js';
+import { getRegions } from '../utils/locations.js';
 import {
-  types,
-  levels,
-  species,
+  getTypes,
+  getLevels,
+  getSpecies,
   generatePlusReport,
 } from '../utils/cases.js';
 
+const types = ref([]);
+const levels = ref([]);
+const species = ref([]);
+const regions = ref([]);
 const cities = ref([]);
 const communes = ref([]);
 const searchResults = ref([]);
 
-const handleRegionChange = (region) => {
-  const regionSelected = regions.find(regionItem => regionItem.name === region);
-  cities.value = regionSelected ? regionSelected.cities : [];
-  document.getElementById('city').value = '';
-  document.getElementById('commune').value = '';
+const handleRegionChange = async (regionId) => {
+  const selectedRegion = regions.value.find(region => region.id === regionId);
+  cities.value = selectedRegion ? selectedRegion.cities : [];
 };
 
-const handleCityChange = (city) => {
-  const citySelected = cities.value.find(cityItem => cityItem.name === city);
+const handleCityChange = (cityId) => {
+  const citySelected = cities.value.find(cityItem => cityItem.id === cityId);
   communes.value = citySelected ? citySelected.communes : [];
-  document.getElementById('commune').value = '';
 };
 
 const handleSubmit = async (evt) => {
@@ -42,26 +43,16 @@ const handleSubmit = async (evt) => {
   }
 };
 
-const translateType = (value) => {
-  const type = types.find(typeItem => typeItem.value === value);
-  return type ? type.title : '';
-};
-
-const translateCriticidad = (value) => {
-  const level = levels.find(levelItem => levelItem.value === value);
-  return level ? level.name : '';
-};
-
-const translateSpecie = (value) => {
-  const specie = species.find(specieItem => specieItem.value === value);
-  return specie ? specie.name : '';
-};
-
 onMounted(async () => {
   // Set required fields
   document.querySelectorAll('form [required]').forEach((requiredField) => {
     requiredField.previousElementSibling.classList.add('required');
   });
+
+  types.value = await getTypes();
+  levels.value = await getLevels();
+  species.value = await getSpecies();
+  regions.value = await getRegions();
 });
 </script>
 
@@ -77,7 +68,7 @@ onMounted(async () => {
             <label for="type">Tipo</label>
             <select name="type" id="type" class="form-select">
               <option value="any" selected>Cualquier tipo</option>
-              <option v-for="typeItem of types" :value="typeItem.value">{{ typeItem.title }}</option>
+              <option v-for="typeItem of types" :value="typeItem.id">{{ typeItem.title }}</option>
             </select>
           </div>
         </div>
@@ -86,7 +77,7 @@ onMounted(async () => {
             <label for="level">Criticidad</label>
             <select name="level" id="level" class="form-select" required>
               <option value="any" selected>Cualquier criticidad</option>
-              <option v-for="(level, index) of levels" :value="level.value" :key="`level-${index}`">{{ level.name }}</option>
+              <option v-for="(level, index) of levels" :value="level.id" :key="`level-${index}`">{{ level.name }}</option>
             </select>
           </div>
         </div>
@@ -95,7 +86,7 @@ onMounted(async () => {
             <label for="region">Región</label>
             <select name="region" id="region" class="form-select" @change="(evt) => handleRegionChange(evt.target.value)">
               <option value="any" selected>Cualquier región</option>
-              <option v-for="region of regions" :value="region.name">{{ region.name }}</option>
+              <option v-for="region of regions" :value="region.id">{{ region.name }}</option>
             </select>
           </div>
         </div>
@@ -104,7 +95,7 @@ onMounted(async () => {
             <label for="city">Ciudad</label>
             <select name="city" id="city" class="form-select" @change="(evt) => handleCityChange(evt.target.value)" required>
               <option value="any" selected>Cualquier ciudad</option>
-              <option v-for="(city, index) of cities" :value="city.name" :key="`city-${index}`">{{ city.name }}</option>
+              <option v-for="(city, index) of cities" :value="city.id" :key="`city-${index}`">{{ city.name }}</option>
             </select>
           </div>
         </div>
@@ -122,7 +113,7 @@ onMounted(async () => {
             <label for="type">Especie</label>
             <select name="specie" id="specie" class="form-select">
               <option value="any" selected>Cualquier especie</option>
-              <option v-for="specie of species" :value="specie.value">{{ specie.name }}</option>
+              <option v-for="specie of species" :value="specie.id">{{ specie.name }}</option>
             </select>
           </div>
         </div>
@@ -147,12 +138,12 @@ onMounted(async () => {
       <tbody>
         <tr v-for="(result, index) of searchResults">
           <th scope="row">{{ index + 1 }}</th>
-          <td>{{ translateType(result.type) }}</td>
-          <td>{{ translateCriticidad(result.level) }}</td>
-          <td>{{ result.region }}</td>
-          <td>{{ result.city }}</td>
+          <td>{{ result.type.title }}</td>
+          <td>{{ result.level.name }}</td>
+          <td>{{ result.region.name }}</td>
+          <td>{{ result.city.name }}</td>
           <td>{{ result.commune }}</td>
-          <td>{{ translateSpecie(result.specie) }}</td>
+          <td>{{ result.specie.name }}</td>
           <td>{{ new Date(result.date).toDateString() }}</td>
         </tr>
       </tbody>
