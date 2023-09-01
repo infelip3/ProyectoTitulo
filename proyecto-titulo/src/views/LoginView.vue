@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import router from '../router';
-import { signInUser } from '../utils/auth';
+import router from '@/router';
+import { signInUser } from '@/utils/auth';
 
 const loginResult = ref('');
 

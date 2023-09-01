@@ -1,11 +1,11 @@
 import { ref } from 'vue';
-import { authClient } from './firebase';
+import { authClient } from '@/utils/firebase';
 import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
 } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js';
-import { getUserByEmail } from './users';
+import { getUserByEmail } from '@/utils/users';
 
 const loggedUser = ref(null);
 

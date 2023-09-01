@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import router from '../router';
+import router from '@/router';
 import Swal from 'sweetalert2';
-import { getRegions } from '../utils/locations.js';
+import { getRegions } from '@/utils/locations.js';
 import {
   getTypes,
   getLevels,
@@ -11,7 +11,7 @@ import {
   getGenres,
   getAges,
   storeCase,
-} from '../utils/cases.js';
+} from '@/utils/cases.js';
 
 const types = ref([]);
 const levels = ref([]);

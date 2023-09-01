@@ -1,4 +1,4 @@
-import { getCollectionData } from './firestore';
+import { getCollectionData } from '@/utils/firestore';
 
 const getRoles = () => getCollectionData('roles');
 

@@ -1,4 +1,4 @@
-import { getCollectionData, getSubCollectionData } from './firestore';
+import { getCollectionData, getSubCollectionData } from '@/utils/firestore';
 
 const getRegions = async () => {
   const regions = await getCollectionData('regions');

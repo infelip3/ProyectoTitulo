@@ -1,7 +1,7 @@
 import { ref } from 'vue';
-import { getLoggedUser } from './auth';
-import { getCollectionData, addDocumentToCollection } from './firestore';
-import { getRegions } from './locations';
+import { getLoggedUser } from '@/utils/auth';
+import { getCollectionData, addDocumentToCollection } from '@/utils/firestore';
+import { getRegions } from '@/utils/locations';
 
 const levels = ref(null);
 const species = ref(null);

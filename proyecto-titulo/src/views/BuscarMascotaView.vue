@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getRegions } from '../utils/locations.js';
-import { getSpecies, getSizes, getGenres, getAges, searchCases } from '../utils/cases.js';
+import { getRegions } from '@/utils/locations.js';
+import { getSpecies, getSizes, getGenres, getAges, searchCases } from '@/utils/cases.js';
 
 const species = ref([]);
 const sizes = ref([]);

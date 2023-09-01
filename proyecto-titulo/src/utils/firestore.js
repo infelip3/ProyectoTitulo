@@ -1,4 +1,4 @@
-import { firestoreClient } from './firebase';
+import { firestoreClient } from '@/utils/firebase';
 import {
   addDoc,
   collection,

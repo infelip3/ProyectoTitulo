@@ -1,4 +1,4 @@
-import { getCollectionData } from '../utils/firestore.js';
+import { getCollectionData } from '@/utils/firestore.js';
 
 const getUserByEmail = async (email) => {
   const users = await getCollectionData('users');

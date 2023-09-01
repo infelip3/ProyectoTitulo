@@ -1,5 +1,5 @@
 <script setup>
-import { getLoggedUser } from '../utils/auth';
+import { getLoggedUser } from '@/utils/auth';
 </script>
 
 <template>

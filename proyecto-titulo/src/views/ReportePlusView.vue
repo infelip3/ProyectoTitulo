@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getRegions } from '../utils/locations.js';
-import { getTypes, getLevels, getSpecies, generatePlusReport } from '../utils/cases.js';
+import { getRegions } from '@/utils/locations.js';
+import { getTypes, getLevels, getSpecies, generatePlusReport } from '@/utils/cases.js';
 
 const types = ref([]);
 const levels = ref([]);

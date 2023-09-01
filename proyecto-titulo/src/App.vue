@@ -1,6 +1,6 @@
 <script setup>
-import VLoading from './components/VLoading.vue';
-import VNavbar from './components/VNavbar.vue';
+import VLoading from '@/components/VLoading.vue';
+import VNavbar from '@/components/VNavbar.vue';
 </script>
 
 <template>

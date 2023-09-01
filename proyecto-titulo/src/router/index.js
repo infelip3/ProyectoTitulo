@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { getLoggedUser, signOutUser } from '../utils/auth';
-import { getRoleByName } from '../utils/roles';
-import LoginView from '../views/LoginView.vue';
-import ForbiddenView from '../views/ForbiddenView.vue';
-import InicioView from '../views/InicioView.vue';
-import QuienesSomosView from '../views/QuienesSomosView.vue';
-import OrganizacionesView from '../views/OrganizacionesView.vue';
-import HistoriasView from '../views/HistoriasView.vue';
-import RegistrarCasoView from '../views/RegistrarCasoView.vue';
-import BuscarMascotaView from '../views/BuscarMascotaView.vue';
-import ReportePlusView from '../views/ReportePlusView.vue';
+import { getLoggedUser, signOutUser } from '@/utils/auth';
+import { getRoleByName } from '@/utils/roles';
+import LoginView from '@/views/LoginView.vue';
+import ForbiddenView from '@/views/ForbiddenView.vue';
+import InicioView from '@/views/InicioView.vue';
+import QuienesSomosView from '@/views/QuienesSomosView.vue';
+import OrganizacionesView from '@/views/OrganizacionesView.vue';
+import HistoriasView from '@/views/HistoriasView.vue';
+import RegistrarCasoView from '@/views/RegistrarCasoView.vue';
+import BuscarMascotaView from '@/views/BuscarMascotaView.vue';
+import ReportePlusView from '@/views/ReportePlusView.vue';
 
 const routes = [
   {
