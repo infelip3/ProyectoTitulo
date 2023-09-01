@@ -1,5 +1,5 @@
 import { firestoreClient } from './firebase';
-import { getFirestore, addDoc, collection, getDocs, onSnapshot, deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
+import { addDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
 
 const getCollectionData = (collectionName) => new Promise(
   async (resolve, reject) => {
@@ -39,7 +39,23 @@ const getSubCollectionData = (collectionName, collectionId, subCollectionName) =
   }
 );
 
+const addDocumentToCollection = (collectionName, documentData) => new Promise(
+  async (resolve, reject) => {
+    try
+    {
+      const docRef = await addDoc(collection(firestoreClient, collectionName), documentData);
+
+      resolve(docRef);
+    }
+    catch (error)
+    {
+      reject(error);
+    }
+  }
+);
+
 export {
   getCollectionData,
   getSubCollectionData,
+  addDocumentToCollection,
 };

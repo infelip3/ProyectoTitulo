@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { getLoggedUser, signOutUser } from '../utils/auth';
-import { getRoleByName, getRoles } from '../utils/roles';
+import { getRoleByName } from '../utils/roles';
 import LoginVue from '../views/Login.vue';
 import ForbiddenVue from '../views/Forbidden.vue';
 import InicioVue from '../views/Inicio.vue';
