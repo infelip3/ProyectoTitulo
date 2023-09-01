@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import router from '../router';
 import Swal from 'sweetalert2';
-import { getRegions } from '../utils/locations.js';
+import { getRegions, getCities } from '../utils/locations.js';
 import { 
   types,
   levels,
@@ -18,11 +18,20 @@ const cities = ref([]);
 const communes = ref([]);
 const base64Image = ref('');
 
-const handleRegionChange = (region) => {
-  const regionSelected = regions.find(regionItem => regionItem.name === region);
-  cities.value = regionSelected ? regionSelected.cities : [];
-  document.getElementById('city').value = '';
-  document.getElementById('commune').value = '';
+const handleRegionChange = async (regionId) => {
+  try
+  {
+    cities.value = await getCities(regionId);
+  }
+  catch(error)
+  {
+    cities.value = [];
+  }
+  finally
+  {
+    document.getElementById('city').value = '';
+    document.getElementById('commune').value = '';
+  }
 };
 
 const handleCityChange = (city) => {
@@ -73,7 +82,6 @@ const handleImageChange = (event) => {
     const reader = new FileReader();
     reader.onload = () => {
       base64Image.value = reader.result;
-      console.log(base64Image);
     };
     reader.readAsDataURL(selectedFile);
   }
@@ -170,7 +178,7 @@ onMounted(async () => {
             <label for="region">Región</label>
             <select name="region" id="region" class="form-select" @change="(evt) => handleRegionChange(evt.target.value)" required>
               <option value='' selected hidden>Seleccione una opción..</option>
-              <option v-for="(region, index) of regions" :value="region.name" :key="`region-${index}`">{{ region.name }}</option>
+              <option v-for="(region, index) of regions" :value="region.id" :key="`region-${index}`">{{ region.name }}</option>
             </select>
           </div>
         </div>

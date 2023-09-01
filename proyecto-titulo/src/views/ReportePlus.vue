@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { getRegions } from '../utils/locations.js';
+import { getRegions, getCities } from '../utils/locations.js';
 import {
   types,
   levels,
@@ -13,13 +13,20 @@ const cities = ref([]);
 const communes = ref([]);
 const searchResults = ref([]);
 
-const handleRegionChange = (region) => {
-  console.log(region, regions.value);
-  const regionSelected = regions.value.find(regionItem => regionItem.name === region);
-  console.log(regionSelected)
-  cities.value = regionSelected ? regionSelected.cities : [];
-  document.getElementById('city').value = '';
-  document.getElementById('commune').value = '';
+const handleRegionChange = async (regionId) => {
+  try
+  {
+    cities.value = await getCities(regionId);
+  }
+  catch(error)
+  {
+    cities.value = [];
+  }
+  finally
+  {
+    document.getElementById('city').value = '';
+    document.getElementById('commune').value = '';
+  }
 };
 
 const handleCityChange = (city) => {
@@ -100,7 +107,7 @@ onMounted(async () => {
             <label for="region">Región</label>
             <select name="region" id="region" class="form-select" @change="(evt) => handleRegionChange(evt.target.value)">
               <option value="any" selected>Cualquier región</option>
-              <option v-for="region of regions" :value="region.name">{{ region.name }}</option>
+              <option v-for="region of regions" :value="region.id">{{ region.name }}</option>
             </select>
           </div>
         </div>
