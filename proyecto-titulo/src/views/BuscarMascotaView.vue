@@ -113,10 +113,10 @@ onMounted(async () => {
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary mt-3">
+      <button type="submit" class="btn btn-primary mt-3" :disabled="isLoading">
         <span
           v-show="isLoading"
-          class="spinner-border spinner-border-sm"
+          class="spinner-grow spinner-grow-sm"
           role="status"
           aria-hidden="true"
           style="margin-right: 5px"
