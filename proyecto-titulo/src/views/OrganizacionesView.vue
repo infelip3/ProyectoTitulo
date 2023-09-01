@@ -24,7 +24,7 @@ const organizations = [
   {
     title: 'Fundación Alma Animal de Rancagua',
     paragraphs: [
-      'Agrupación animalista que busca mejorar las condiciones de vida de perros, gatos en situación de abandono, crear conciencia y educar sobre la tenencia responsable de mascotas.',     
+      'Agrupación animalista que busca mejorar las condiciones de vida de perros, gatos en situación de abandono, crear conciencia y educar sobre la tenencia responsable de mascotas.',
     ],
     url: 'https://www.facebook.com/Alma-animal-Rancagua-Offical-450764244961909/',
     email: 'almaanimalrancagua@gmail.com',
@@ -33,7 +33,7 @@ const organizations = [
   {
     title: 'Sociedad Protectora de Animales Osorno',
     paragraphs: [
-      'Es una organización sin fines de lucro que se constituyó legalmente el 22 de noviembre de 1992, bajo la personalidad jurídica Municipal Nro.192-F, cuyo fin es ayudar a los animales, en especial a los abandonados.',    
+      'Es una organización sin fines de lucro que se constituyó legalmente el 22 de noviembre de 1992, bajo la personalidad jurídica Municipal Nro.192-F, cuyo fin es ayudar a los animales, en especial a los abandonados.',
     ],
     url: 'https://www.facebook.com/groups/379946608854836/?fref=ts',
     email: 'animalesosorno@gmail.com',
@@ -74,7 +74,7 @@ const organizations = [
     paragraphs: [
       'En la Fundación Garras y Patas somos un grupo de personas unidas por la sensibilidad hacia el problema de la sobrepoblación de mascotas abandonadas, contamos con un Directorio que dirige la Fundación, líderes que coordinan las diversas actividades que se realizan y voluntarios activos todos trabajamos gratis y en nuestro tiempo libre.',
       'La Fundación se dedica al rescate, recuperación, readaptación y posterior reinserción en nuevos hogares, de perros y gatos abandonados y a la recaudación de fondos para estos fines. Contamos actualmente con voluntarios activos, socios aportantes de dinero, variados auspiciadores y gran presencia en las redes sociales.',
-      'Esto ha generado un gran contacto con la comunidad, cuyos miembros nos escriben en forma constante solicitando ayuda y consejos, con lo cual cumplimos además un rol educativo en la tenencia responsable de mascotas, la necesidad de esterilización y educación de las mismas.',      
+      'Esto ha generado un gran contacto con la comunidad, cuyos miembros nos escriben en forma constante solicitando ayuda y consejos, con lo cual cumplimos además un rol educativo en la tenencia responsable de mascotas, la necesidad de esterilización y educación de las mismas.',
     ],
     url: 'http://www.garrasypatas.cl/',
     email: 'contacto@garrasypatas.cl',
@@ -168,22 +168,37 @@ const organizations = [
     url: 'https://www.facebook.com/groups/adoptaunamigoosorno/',
     email: '',
     image: 'adopta_un_amigo_osorno.jpg',
-  }
+  },
 ];
 </script>
 
 <template>
   <div class="container mt-4 mb-4">
     <div class="row">
-      <div v-for="(organization, organizationIndex) of organizations" :key="`organization-${organizationIndex}`" class="col-4 mt-2 mb-2">
+      <div
+        v-for="(organization, organizationIndex) of organizations"
+        :key="`organization-${organizationIndex}`"
+        class="col-4 mt-2 mb-2"
+      >
         <div class="item">
-          <img :src="`images/organizations/${organization.image}`" class="card-img-top" alt="">
+          <img :src="`images/organizations/${organization.image}`" class="card-img-top" alt="" />
           <div class="content">
             <h4>{{ organization.title }}</h4>
-            <p v-for="(paragraph, index) of organization.paragraphs" :key="`organization-${organizationIndex}-paragraph-${index}`">{{ paragraph }}</p>
+            <p
+              v-for="(paragraph, index) of organization.paragraphs"
+              :key="`organization-${organizationIndex}-paragraph-${index}`"
+            >
+              {{ paragraph }}
+            </p>
             <div class="btn-group" role="group">
               <a :href="organization.url" target="_blank" class="btn btn-primary">Ir al sitio</a>
-              <a v-if="organization.email" :href="`mailto:${organization.email}`" target="_blank" class="btn btn-info">{{ organization.email }}</a>
+              <a
+                v-if="organization.email"
+                :href="`mailto:${organization.email}`"
+                target="_blank"
+                class="btn btn-info"
+                >{{ organization.email }}</a
+              >
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { getLoggedUser } from './auth';
-import { getCollectionData, addDocumentToCollection } from "./firestore"
+import { getCollectionData, addDocumentToCollection } from './firestore';
 import { getRegions } from './locations';
 
 const levels = ref(null);
@@ -12,14 +12,13 @@ const types = ref(null);
 const regions = ref(null);
 
 const forceLoad = async (refItem, loaderCallback) => {
-  if(refItem.value === null)
-  {
+  if (refItem.value === null) {
     refItem.value = await loaderCallback();
   }
 };
 
-const loadLocalRegions = () => new Promise(
-  (resolve, reject) => {
+const loadLocalRegions = () =>
+  new Promise((resolve, reject) => {
     getRegions()
       .then((response) => {
         regions.value = response;
@@ -27,13 +26,12 @@ const loadLocalRegions = () => new Promise(
       })
       .catch((error) => {
         regions.value = [];
-        reject(error)    
+        reject(error);
       });
-  }
-);
+  });
 
-const getTypes = () => new Promise(
-  (resolve, reject) => {
+const getTypes = () =>
+  new Promise((resolve, reject) => {
     getCollectionData('types')
       .then((response) => {
         types.value = response;
@@ -41,13 +39,12 @@ const getTypes = () => new Promise(
       })
       .catch((error) => {
         types.value = [];
-        reject(error)    
+        reject(error);
       });
-  }
-);
+  });
 
-const getLevels = () => new Promise(
-  (resolve, reject) => {
+const getLevels = () =>
+  new Promise((resolve, reject) => {
     getCollectionData('levels')
       .then((response) => {
         levels.value = response;
@@ -55,13 +52,12 @@ const getLevels = () => new Promise(
       })
       .catch((error) => {
         levels.value = [];
-        reject(error)    
+        reject(error);
       });
-  }
-);
+  });
 
-const getSpecies = () => new Promise(
-  (resolve, reject) => {
+const getSpecies = () =>
+  new Promise((resolve, reject) => {
     getCollectionData('species')
       .then((response) => {
         species.value = response;
@@ -69,13 +65,12 @@ const getSpecies = () => new Promise(
       })
       .catch((error) => {
         species.value = [];
-        reject(error)    
+        reject(error);
       });
-  }
-);
+  });
 
-const getSizes = () => new Promise(
-  (resolve, reject) => {
+const getSizes = () =>
+  new Promise((resolve, reject) => {
     getCollectionData('size')
       .then((response) => {
         sizes.value = response;
@@ -83,13 +78,12 @@ const getSizes = () => new Promise(
       })
       .catch((error) => {
         sizes.value = [];
-        reject(error)    
+        reject(error);
       });
-  }
-);
+  });
 
-const getGenres = () => new Promise(
-  (resolve, reject) => {
+const getGenres = () =>
+  new Promise((resolve, reject) => {
     getCollectionData('genre')
       .then((response) => {
         genres.value = response;
@@ -97,13 +91,12 @@ const getGenres = () => new Promise(
       })
       .catch((error) => {
         genres.value = [];
-        reject(error)    
+        reject(error);
       });
-  }
-);
+  });
 
-const getAges = () => new Promise(
-  (resolve, reject) => {
+const getAges = () =>
+  new Promise((resolve, reject) => {
     getCollectionData('ages')
       .then((response) => {
         ages.value = response;
@@ -111,66 +104,51 @@ const getAges = () => new Promise(
       })
       .catch((error) => {
         ages.value = [];
-        reject(error)    
+        reject(error);
       });
-  }
-);
+  });
 
 const storeCase = async (caseData) => {
-
   const responseErrors = {};
-  if(!caseData.type)
-  {
+  if (!caseData.type) {
     responseErrors.type = ['El tipo es requerido'];
   }
-  if(!caseData.level)
-  {
+  if (!caseData.level) {
     responseErrors.level = ['El nivel es requerido'];
   }
-  if(!caseData.region)
-  {
+  if (!caseData.region) {
     responseErrors.region = ['La región es requerida'];
   }
-  if(!caseData.city)
-  {
+  if (!caseData.city) {
     responseErrors.city = ['La ciudad es requerida'];
   }
-  if(!caseData.commune)
-  {
+  if (!caseData.commune) {
     responseErrors.commune = ['La comuna es requerida'];
   }
-  if(!caseData.specie)
-  {
+  if (!caseData.specie) {
     responseErrors.specie = ['La especie es requerida'];
   }
-  if(!caseData.size)
-  {
+  if (!caseData.size) {
     responseErrors.size = ['El tamaño es requerido'];
   }
-  if(!caseData.genre)
-  {
+  if (!caseData.genre) {
     responseErrors.size = ['El género es requerido'];
   }
-  if(!caseData.age)
-  {
+  if (!caseData.age) {
     responseErrors.age = ['La edad es requerida'];
   }
-  if(!caseData.description)
-  {
+  if (!caseData.description) {
     responseErrors.description = ['La descripción es requerida'];
   }
 
-  if(Object.keys(responseErrors).length > 0)
-  {
+  if (Object.keys(responseErrors).length > 0) {
     throw new Error(responseErrors);
-  }
-  else
-  {
+  } else {
     const loggedUser = getLoggedUser();
     const newCase = {
       ...caseData,
       reporterEmail: loggedUser.email,
-      date: new Date().toISOString(),  
+      date: new Date().toISOString(),
     };
 
     return addDocumentToCollection('cases', newCase);
@@ -203,7 +181,6 @@ const searchCases = async (filters) => {
       return regionMatched && specieMatched && sizeMatched && genreMatched && ageMatched;
     })
     .map((caseItem) => {
-
       caseItem.region = regions.value.find((regionItem) => regionItem.id === caseItem.region);
       caseItem.type = types.value.find((typeItem) => typeItem.id === caseItem.type);
       caseItem.level = levels.value.find((levelItem) => levelItem.id === caseItem.level);
@@ -241,10 +218,16 @@ const generatePlusReport = async (filters) => {
       const communeMatched = commune === 'any' ? true : caseItem.commune === commune;
       const specieMatched = specie === 'any' ? true : caseItem.specie === specie;
 
-      return typeMatched && levelMatched && regionMatched && cityMatched && communeMatched && specieMatched;
+      return (
+        typeMatched &&
+        levelMatched &&
+        regionMatched &&
+        cityMatched &&
+        communeMatched &&
+        specieMatched
+      );
     })
     .map((caseItem) => {
-
       caseItem.type = types.value.find((typeItem) => typeItem.id === caseItem.type);
       caseItem.level = levels.value.find((levelItem) => levelItem.id === caseItem.level);
       caseItem.specie = species.value.find((specieItem) => specieItem.id === caseItem.specie);
@@ -256,7 +239,7 @@ const generatePlusReport = async (filters) => {
 
       return caseItem;
     });
-  
+
   return filteredCases;
 };
 
@@ -270,4 +253,4 @@ export {
   storeCase,
   searchCases,
   generatePlusReport,
-}
+};

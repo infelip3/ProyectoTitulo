@@ -6,7 +6,7 @@ import VNavbar from './components/VNavbar.vue';
 <template>
   <div>
     <VLoading />
-    <VNavbar/>
+    <VNavbar />
     <router-view />
   </div>
 </template>

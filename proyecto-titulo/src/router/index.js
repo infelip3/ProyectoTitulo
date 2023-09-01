@@ -66,13 +66,11 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   // Show the loading component when navigating
   document.querySelector('.loading').style.visibility = 'visible';
-  
-  if(to.fullPath === '/logout') {
+
+  if (to.fullPath === '/logout') {
     await signOutUser();
     next('/login');
-  }
-  else
-  {
+  } else {
     const loggedUser = getLoggedUser();
     const route = routes.find((route) => route.path === to.fullPath);
     if (route) {

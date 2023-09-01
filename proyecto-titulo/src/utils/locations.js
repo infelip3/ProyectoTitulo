@@ -1,15 +1,12 @@
-import { getCollectionData, getSubCollectionData } from "./firestore"
+import { getCollectionData, getSubCollectionData } from './firestore';
 
 const getRegions = async () => {
   const regions = await getCollectionData('regions');
-  for(const region of regions)
-  {
+  for (const region of regions) {
     region.cities = await getSubCollectionData('regions', region.id, 'cities');
   }
 
   return regions;
-}
+};
 
-export {
-  getRegions,
-}
+export { getRegions };
