@@ -23,6 +23,7 @@ const regions = ref([]);
 const cities = ref([]);
 const communes = ref([]);
 const base64Image = ref('');
+const isLoading = ref(false);
 
 const handleRegionChange = async (regionId) => {
   const selectedRegion = regions.value.find(region => region.id === regionId);
@@ -88,6 +89,7 @@ const handleImageChange = (event) => {
 
 const handleSubmit = (evt) => {
   evt.preventDefault();
+  isLoading.value = true;
   const form = evt.target;
 
   const formData = new FormData(form);
@@ -112,6 +114,9 @@ const handleSubmit = (evt) => {
       {
         validateForm(form, errorResponse.errors);
       }
+    })
+    .finally(() => {
+      isLoading.value = false;
     });
 };
 
@@ -257,7 +262,10 @@ onMounted(async () => {
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary mt-3">Registrar caso</button>
+      <button type="submit" class="btn btn-primary mt-3">
+        <span v-show="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-right: 5px;"></span>
+        <span class="sr-only">{{ isLoading ? 'Registrando..' : 'Registrar' }}</span>
+      </button>
     </form>
   </div>
 </template>

@@ -15,9 +15,11 @@ const genres = ref([]);
 const ages = ref([]);
 const regions = ref([]);
 const searchResults = ref([]);
+const isLoading = ref(false);
 
 const handleSubmit = async (evt) => {
   evt.preventDefault();
+  isLoading.value = true;
   const form = evt.target;
   const formData = new FormData(form);
   const filtersData = Object.fromEntries(formData.entries());
@@ -30,6 +32,10 @@ const handleSubmit = async (evt) => {
   catch(error)
   {
     searchResults.value = [];
+  }
+  finally
+  {
+    isLoading.value = false;
   }
 };
 
@@ -100,7 +106,10 @@ onMounted(async () => {
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary mt-3">Buscar</button>
+      <button type="submit" class="btn btn-primary mt-3">
+        <span v-show="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-right: 5px;"></span>
+        <span class="sr-only">{{ isLoading ? 'Buscando..' : 'Buscar' }}</span>  
+      </button>
     </form>
   </div>
   <div class="container mt-4 mb-4">
