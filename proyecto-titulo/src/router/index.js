@@ -1,58 +1,58 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { getLoggedUser, signOutUser } from '../utils/auth';
-import { getRoleByName } from '../utils/roles';
-import LoginVue from '../views/Login.vue';
-import ForbiddenVue from '../views/Forbidden.vue';
-import InicioVue from '../views/Inicio.vue';
-import QuienesSomosVue from '../views/QuienesSomos.vue';
-import OrganizacionesVue from '../views/Organizaciones.vue';
-import HistoriasVue from '../views/Historias.vue';
-import RegistrarCasoVue from '../views/RegistrarCaso.vue';
-import BuscarMascotaVue from '../views/BuscarMascota.vue';
-import ReportePlusVue from '../views/ReportePlus.vue';
+import { getLoggedUser, signOutUser } from '@/utils/auth';
+import { getRoleByName } from '@/utils/roles';
+import LoginView from '@/views/LoginView.vue';
+import ForbiddenView from '@/views/ForbiddenView.vue';
+import InicioView from '@/views/InicioView.vue';
+import QuienesSomosView from '@/views/QuienesSomosView.vue';
+import OrganizacionesView from '@/views/OrganizacionesView.vue';
+import HistoriasView from '@/views/HistoriasView.vue';
+import RegistrarCasoView from '@/views/RegistrarCasoView.vue';
+import BuscarMascotaView from '@/views/BuscarMascotaView.vue';
+import ReportePlusView from '@/views/ReportePlusView.vue';
 
 const routes = [
   {
     path: '/',
-    component: InicioVue,
+    component: InicioView,
   },
   {
     path: '/login',
     alias: '/logout',
-    component: LoginVue,
+    component: LoginView,
   },
   {
     path: '/forbidden',
-    component: ForbiddenVue,
+    component: ForbiddenView,
   },
   {
     path: '/quienes-somos',
-    component: QuienesSomosVue,
+    component: QuienesSomosView,
     requiredAuth: false,
   },
   {
     path: '/organizaciones',
-    component: OrganizacionesVue,
+    component: OrganizacionesView,
     requiredAuth: false,
   },
   {
     path: '/historias',
-    component: HistoriasVue,
+    component: HistoriasView,
     requiredAuth: false,
   },
   {
     path: '/registrar-caso',
-    component: RegistrarCasoVue,
+    component: RegistrarCasoView,
     requiredAuth: true,
   },
   {
     path: '/buscar',
-    component: BuscarMascotaVue,
+    component: BuscarMascotaView,
     requiredAuth: true,
   },
   {
     path: '/reporte-plus',
-    component: ReportePlusVue,
+    component: ReportePlusView,
     requiredAuth: true,
   },
   { path: '/:catchAll(.*)*', redirect: '/' },
@@ -66,13 +66,11 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   // Show the loading component when navigating
   document.querySelector('.loading').style.visibility = 'visible';
-  
-  if(to.fullPath === '/logout') {
+
+  if (to.fullPath === '/logout') {
     await signOutUser();
     next('/login');
-  }
-  else
-  {
+  } else {
     const loggedUser = getLoggedUser();
     const route = routes.find((route) => route.path === to.fullPath);
     if (route) {

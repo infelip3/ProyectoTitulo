@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import router from '../router';
-import { signInUser } from '../utils/auth';
+import router from '@/router';
+import { signInUser } from '@/utils/auth';
 
 const loginResult = ref('');
 
@@ -11,12 +11,10 @@ const handleSubmit = (evt) => {
   const formData = new FormData(form);
   const loginData = Object.fromEntries(formData.entries());
 
-  signInUser(
-    {
-      email: loginData.email,
-      password: loginData.password
-    }
-  )
+  signInUser({
+    email: loginData.email,
+    password: loginData.password,
+  })
     .then(() => {
       router.push('/');
     })
@@ -36,13 +34,13 @@ const handleSubmit = (evt) => {
         <div class="offset-4 col-4 mt-2">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" value="admin@mail.com">
+            <input type="email" class="form-control" name="email" value="admin@mail.com" />
           </div>
         </div>
         <div class="offset-4 col-4 mt-2">
           <div class="form-group">
             <label for="password">Contraseña</label>
-            <input type="password" class="form-control" name="password" value="furryadmin1">
+            <input type="password" class="form-control" name="password" value="furryadmin1" />
             <span>{{ loginResult }}</span>
           </div>
         </div>
