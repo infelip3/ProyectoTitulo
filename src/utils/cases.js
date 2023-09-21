@@ -250,6 +250,7 @@ export {
   getGenres,
   getAges,
   getTypes,
+  getCases,
   storeCase,
   searchCases,
   generatePlusReport,

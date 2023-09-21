@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "csv-write-stream": "^2.0.0",
-    "fs": "^0.0.1-security",
-    "mysql": "^2.18.1"
-  }
-}
