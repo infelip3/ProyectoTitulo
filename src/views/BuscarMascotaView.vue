@@ -131,11 +131,11 @@ onMounted(async () => {
         <div class="item">
           <img
             v-if="result.image"
-            :src="result.image ?? `images/search/no-image.jpg`"
+            :src="result.image ?? `/images/search/no-image.jpg`"
             class="card-img-top"
             alt=""
           />
-          <img v-else src="images/search/no-image.jpg" class="card-img-top rounded" alt="" />
+          <img v-else src="/images/search/no-image.jpg" class="card-img-top rounded" alt="" />
           <div class="content">
             <h4>{{ result.region.name }}</h4>
             <p>{{ result.description }}</p>
